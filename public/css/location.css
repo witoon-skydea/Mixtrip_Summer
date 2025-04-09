@@ -1,0 +1,589 @@
+/**
+ * MixTrip Summer - Location Styles
+ * Styles for location-related pages and components
+ */
+
+/* Location Search Page */
+.location-search-page {
+  padding: var(--spacing-xl) 0;
+}
+
+.search-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-subtitle {
+  color: var(--text-medium);
+  margin-bottom: var(--spacing-lg);
+}
+
+.search-form {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.search-input-group {
+  position: relative;
+  margin-bottom: var(--spacing-md);
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-medium);
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-xl);
+  border: 1px solid var(--text-light);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+}
+
+.search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: flex-end;
+}
+
+.filter-item {
+  flex: 1;
+  min-width: 150px;
+}
+
+.filter-item label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+}
+
+/* Search Content Layout */
+.search-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.search-results-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .search-results-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Map Container */
+.map-container {
+  width: 100%;
+  background-color: var(--background-light);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.search-map {
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-medium);
+  background-color: var(--background-off);
+}
+
+.map-placeholder i {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Search Results Panel */
+.search-results {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.results-header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--text-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.results-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.results-count {
+  font-size: 0.875rem;
+  color: var(--text-medium);
+}
+
+.results-list {
+  padding: var(--spacing-md);
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+/* Result Item */
+.result-item {
+  display: flex;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.result-item:hover, .result-item.active {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+}
+
+.result-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: var(--border-radius-md);
+  margin-right: var(--spacing-md);
+}
+
+.result-info {
+  flex: 1;
+}
+
+.result-name {
+  margin: 0 0 var(--spacing-xs);
+  font-size: 1rem;
+}
+
+.result-address {
+  font-size: 0.875rem;
+  color: var(--text-medium);
+  margin-bottom: var(--spacing-xs);
+}
+
+.result-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.result-type {
+  font-size: 0.75rem;
+  background-color: var(--secondary-light);
+  color: var(--secondary-dark);
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--border-radius-pill);
+}
+
+/* Empty Results */
+.empty-results {
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--text-medium);
+}
+
+.empty-results i {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.5;
+}
+
+.empty-results .hint {
+  font-size: 0.875rem;
+  margin-top: var(--spacing-md);
+  font-style: italic;
+}
+
+/* Search Info Sections */
+.search-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .search-info {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.info-section {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.info-section h3 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--text-light);
+  padding-bottom: var(--spacing-sm);
+}
+
+.info-steps {
+  padding-left: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+.info-steps li {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Create Location Modal */
+.coordinates-inputs {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.coordinate-input {
+  flex: 1;
+}
+
+.address-inputs {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xs);
+}
+
+/* Map Info Window */
+.map-info-window {
+  padding: var(--spacing-xs);
+  max-width: 250px;
+}
+
+.map-info-window h3 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1rem;
+}
+
+.map-info-window p {
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.875rem;
+}
+
+.map-info-window .btn {
+  margin-top: var(--spacing-sm);
+}
+
+/* Location Detail Page */
+.location-detail-page {
+  padding: var(--spacing-xl) 0;
+}
+
+.location-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.location-title {
+  margin: 0 0 var(--spacing-sm);
+}
+
+.location-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.location-type {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.875rem;
+}
+
+.location-address {
+  display: flex;
+  align-items: center;
+  color: var(--text-medium);
+}
+
+.location-address i {
+  margin-right: var(--spacing-xs);
+}
+
+/* Location Content Layout */
+.location-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 992px) {
+  .location-layout {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.location-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.location-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Location Sections */
+.location-section {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--text-light);
+  padding-bottom: var(--spacing-sm);
+}
+
+.location-description p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.text-muted {
+  color: var(--text-medium);
+  font-style: italic;
+}
+
+/* Contact Details */
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+}
+
+.contact-item i {
+  width: 20px;
+  margin-right: var(--spacing-sm);
+  color: var(--primary-color);
+}
+
+/* Operating Hours */
+.operating-hours {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.hours-item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px dashed var(--text-light);
+}
+
+.hours-item:last-child {
+  border-bottom: none;
+}
+
+.day-name {
+  font-weight: 500;
+}
+
+.hours-time {
+  color: var(--text-medium);
+}
+
+.closed {
+  color: var(--error-color);
+}
+
+/* Related Trips */
+.related-trips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.related-trip-item {
+  display: flex;
+  border: 1px solid var(--text-light);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.related-trip-item:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.trip-image {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.trip-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trip-info {
+  flex: 1;
+  padding: var(--spacing-sm);
+}
+
+.trip-title {
+  margin: 0 0 var(--spacing-xs);
+  font-size: 1rem;
+}
+
+.trip-title a {
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.trip-title a:hover {
+  color: var(--primary-color);
+}
+
+.trip-creator {
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.trip-dates {
+  font-size: 0.75rem;
+  color: var(--text-medium);
+}
+
+.trip-dates i {
+  margin-right: var(--spacing-xs);
+}
+
+/* Sidebar Sections */
+.sidebar-section {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.sidebar-title {
+  margin: 0;
+  padding: var(--spacing-md);
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 1.125rem;
+}
+
+.location-map {
+  height: 300px;
+}
+
+/* Location Actions */
+.location-actions {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.add-to-trip-form {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Location Images */
+.location-images {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.location-image {
+  width: calc(50% - var(--spacing-xs));
+  position: relative;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+.location-image img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-xs);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* Location Tags */
+.location-tags {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.tag-item {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--secondary-light);
+  color: var(--secondary-dark);
+  border-radius: var(--border-radius-pill);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tag-item:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}

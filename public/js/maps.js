@@ -256,6 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
       fullscreenControl: true
     });
     
+    // Custom marker for manual location creation
+    let customMarker = null;
+    
     // Create search box
     const input = document.getElementById('locationSearchInput');
     const searchBox = new google.maps.places.SearchBox(input);
@@ -332,6 +335,51 @@ document.addEventListener('DOMContentLoaded', () => {
         map.fitBounds(bounds);
       }
     }
+    
+    // Add click listener to the map for custom location creation
+    map.addListener('click', (event) => {
+      const location = event.latLng;
+      
+      // Remove previous custom marker if exists
+      if (customMarker) {
+        customMarker.setMap(null);
+      }
+      
+      // Create new custom marker
+      customMarker = new google.maps.Marker({
+        position: location,
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        icon: {
+          url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        }
+      });
+      
+      // Update coordinates in the form
+      const createLocationModal = document.getElementById('createLocationModal');
+      const latInput = document.getElementById('newLocationLat');
+      const lngInput = document.getElementById('newLocationLng');
+      
+      if (latInput && lngInput) {
+        latInput.value = location.lat().toFixed(6);
+        lngInput.value = location.lng().toFixed(6);
+      }
+      
+      // Open the create location modal
+      if (createLocationModal) {
+        createLocationModal.classList.add('is-active');
+      }
+      
+      // Add drag listener to update coordinates when marker is moved
+      customMarker.addListener('dragend', () => {
+        const newPosition = customMarker.getPosition();
+        if (latInput && lngInput) {
+          latInput.value = newPosition.lat().toFixed(6);
+          lngInput.value = newPosition.lng().toFixed(6);
+        }
+      });
+    });
     
     // Handle places changed event
     let markers = [];
