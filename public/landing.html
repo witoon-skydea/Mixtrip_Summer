@@ -80,12 +80,15 @@
         
         <p>Welcome to MixTrip Summer</p>
         <p>Loading the application...</p>
-        <p>If you are not redirected automatically, <a href="/home" class="btn">Click Here</a></p>
+        <p>If you are not redirected automatically, <a href="/" class="btn">Click Here</a></p>
     
         <script>
-            // Redirect to the main application page after a short delay
+            // Redirect directly to the application root to avoid redirect loops
             setTimeout(function() {
-                window.location.href = '/home';
+                // Check that we're not already on the home page to prevent loops
+                if (window.location.pathname !== '/') {
+                    window.location.href = '/';
+                }
             }, 1500);
         </script>
     </div>

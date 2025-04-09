@@ -1,0 +1,25 @@
+<%- contentFor('body') %>
+
+<div class="container">
+  <div class="test-wrapper" style="padding: 40px; background-color: #f5f7fa; border-radius: 8px; margin: 40px 0; text-align: center;">
+    <h1>EJS Testing Page</h1>
+    
+    <div class="test-content" style="margin: 30px 0; padding: 20px; background-color: #ffffff; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h2><%= message %></h2>
+      <p>This is a simple test page to verify that EJS templates are rendering correctly with the express-ejs-layouts package.</p>
+      
+      <div class="test-data">
+        <h3>Current Date and Time:</h3>
+        <p><%= new Date().toLocaleString() %></p>
+        
+        <h3>Environment:</h3>
+        <p>NODE_ENV: <%= process.env.NODE_ENV || 'Not set' %></p>
+      </div>
+    </div>
+    
+    <div class="test-links">
+      <a href="/" class="btn btn-primary">Go to Homepage</a>
+      <a href="/test/data" class="btn btn-outline">View Test API Data</a>
+    </div>
+  </div>
+</div>

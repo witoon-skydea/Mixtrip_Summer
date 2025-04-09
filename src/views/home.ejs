@@ -1,0 +1,285 @@
+<%- contentFor('body') %>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Plan Your Perfect Trip with MixTrip</h1>
+            <p class="hero-subtitle">Create, share, and discover amazing travel itineraries</p>
+            <div class="hero-buttons">
+                <a href="/trips/create" class="btn btn-primary btn-lg">Create a Trip</a>
+                <a href="/trips/explore" class="btn btn-outline btn-lg">Explore Trips</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="/images/hero-image.jpg" alt="Travel Planning">
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <h2 class="section-title">Why Choose MixTrip</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3 class="feature-title">Easy Trip Planning</h3>
+                <p class="feature-desc">Create detailed travel itineraries with our intuitive planning tools</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3 class="feature-title">Share & Collaborate</h3>
+                <p class="feature-desc">Share your trips with friends and family or make them public</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="feature-title">Get Inspired</h3>
+                <p class="feature-desc">Discover amazing trips created by our global community</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-route"></i>
+                </div>
+                <h3 class="feature-title">Interactive Maps</h3>
+                <p class="feature-desc">Visualize your journey with interactive maps and directions</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3 class="step-title">Create Your Trip</h3>
+          <p>Start by giving your trip a name, description, and dates. Choose whether to make it public or private.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3 class="step-title">Add Locations</h3>
+          <p>Search and add destinations to your trip. Our integration with Google Maps makes finding places easy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3 class="step-title">Plan Your Itinerary</h3>
+          <p>Organize your trip day by day. Add activities, set times, and include notes for each stop.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3 class="step-title">Share & Discover</h3>
+          <p>Share your finished itinerary with friends or the MixTrip community. Explore and get inspired by others.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Destinations -->
+<section class="destinations">
+    <div class="container">
+        <h2 class="section-title">Popular Destinations</h2>
+        <div class="destinations-grid">
+            <div class="destination-card">
+                <img src="/images/destinations/bangkok.jpg" alt="Bangkok" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>Bangkok</h3>
+                    <p>Thailand</p>
+                    <a href="/trips/explore?location=Bangkok" class="btn btn-sm btn-light">Explore</a>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="/images/destinations/chiang-mai.jpg" alt="Chiang Mai" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>Chiang Mai</h3>
+                    <p>Thailand</p>
+                    <a href="/trips/explore?location=Chiang+Mai" class="btn btn-sm btn-light">Explore</a>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="/images/destinations/phuket.jpg" alt="Phuket" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>Phuket</h3>
+                    <p>Thailand</p>
+                    <a href="/trips/explore?location=Phuket" class="btn btn-sm btn-light">Explore</a>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="/images/destinations/krabi.jpg" alt="Krabi" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>Krabi</h3>
+                    <p>Thailand</p>
+                    <a href="/trips/explore?location=Krabi" class="btn btn-sm btn-light">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/trips/explore" class="btn btn-outline">View All Destinations</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Plan Your Next Adventure?</h2>
+            <p>Join our community of travelers and start creating your perfect trip today.</p>
+            <a href="/auth/register" class="btn btn-primary btn-lg">Sign Up for Free</a>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Home Page Specific Styles */
+
+/* How It Works Section */
+.how-it-works {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--background-off);
+}
+
+.steps {
+  margin-top: var(--spacing-xl);
+}
+
+.step {
+  display: flex;
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+}
+
+.step:last-child {
+  margin-bottom: 0;
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  bottom: -40px;
+  width: 2px;
+  background-color: var(--primary-light);
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin-right: var(--spacing-lg);
+  z-index: 1;
+}
+
+.step-content {
+  flex: 1;
+  padding-top: var(--spacing-sm);
+}
+
+.step-title {
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.25rem;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--spacing-xxl) 0;
+  background-color: white;
+}
+
+.testimonials-slider {
+  display: flex;
+  gap: var(--spacing-xl);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-xl);
+}
+
+.testimonial {
+  flex: 1;
+  min-width: 300px;
+  background-color: var(--background-off);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.testimonial-content {
+  margin-bottom: var(--spacing-md);
+  font-style: italic;
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+
+.testimonial-content p {
+  margin: 0;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+}
+
+.author-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: var(--spacing-sm);
+}
+
+.author-info h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.author-info p {
+  margin: 0;
+  color: var(--text-medium);
+  font-size: 0.875rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  .step {
+    flex-direction: column;
+  }
+  
+  .step-number {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .step:not(:last-child)::after {
+    left: 40px;
+    top: 80px;
+    width: 2px;
+    height: calc(100% - 40px);
+  }
+  
+  .testimonials-slider {
+    flex-direction: column;
+  }
+}
+</style>

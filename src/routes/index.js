@@ -1,27 +1,44 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const logger = require('../utils/logger');
 
 /**
  * @route   GET /
- * @desc    Home page route (redirects to public/index.html for first-time loading)
+ * @desc    Root route that handles direct EJS rendering
  * @access  Public
  */
 router.get('/', (req, res) => {
-  // Static HTML page in public folder will handle the initial loading
-  res.sendFile('index.html', { root: 'public' });
+  logger.info('Rendering main home view');
+  // Set a cookie to indicate the user has visited
+  res.cookie('visited', 'true', { maxAge: 24 * 60 * 60 * 1000 }); // 24 hours
+  
+  return res.render('home', { 
+    title: 'MixTrip Summer',
+    message: 'Your travel planning companion',
+    user: req.session.user || null,
+    pageCss: ['main', 'utilities']
+  });
 });
 
 /**
  * @route   GET /home
- * @desc    Main application home page
+ * @desc    Home page alias
  * @access  Public
  */
 router.get('/home', (req, res) => {
-  res.render('index', { 
-    title: 'MixTrip Summer',
-    message: 'Your travel planning companion',
-    user: req.session.user || null
-  });
+  logger.info('Redirecting /home to root');
+  return res.redirect('/');
+});
+
+/**
+ * @route   GET /index
+ * @desc    Index page alias
+ * @access  Public
+ */
+router.get('/index', (req, res) => {
+  logger.info('Redirecting /index to root');
+  return res.redirect('/');
 });
 
 /**

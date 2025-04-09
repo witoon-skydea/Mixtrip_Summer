@@ -135,33 +135,63 @@ exports.hasVerifiedEmail = async (req, res, next) => {
  */
 exports.attachUser = async (req, res, next) => {
   try {
+    // Skip user attachment on public static files - improve performance
+    if (req.path.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
+      return next();
+    }
+    
     // Check for session
-    if (req.session && req.session.user) {
-      const user = await User.findById(req.session.user.id);
-      req.user = user;
+    if (req.session && req.session.user && req.session.user.id) {
+      try {
+        const user = await User.findById(req.session.user.id).select('-password');
+        if (user) {
+          req.user = user;
+          // Update timestamp to keep session fresh
+          req.session.lastAccess = Date.now();
+        } else {
+          // User no longer exists in database, clear session
+          req.session.user = null;
+          req.user = null;
+        }
+      } catch (err) {
+        logger.warn(`Error fetching user from session: ${err.message}`);
+        req.user = null;
+      }
     } else {
       // Check for JWT token
       const token = req.cookies.token || req.header('Authorization')?.replace('Bearer ', '');
       
       if (token) {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded.id);
-        req.user = user;
-        
-        // Update session if token is valid
-        if (user) {
-          req.session.user = {
-            id: user._id,
-            username: user.username,
-            role: user.role,
-            isLoggedIn: true
-          };
+        try {
+          const decoded = jwt.verify(token, process.env.JWT_SECRET);
+          const user = await User.findById(decoded.id).select('-password');
+          
+          if (user) {
+            req.user = user;
+            
+            // Update session if token is valid
+            req.session.user = {
+              id: user._id,
+              username: user.username,
+              role: user.role,
+              isLoggedIn: true,
+              lastAccess: Date.now()
+            };
+          }
+        } catch (tokenErr) {
+          logger.warn(`Invalid token: ${tokenErr.message}`);
+          // Clear invalid token
+          res.clearCookie('token');
+          req.user = null;
         }
+      } else {
+        req.user = null;
       }
     }
     
     next();
   } catch (error) {
+    logger.error(`Error in attachUser middleware: ${error.message}`);
     // Continue even if there's an error
     req.user = null;
     next();

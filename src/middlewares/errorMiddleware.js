@@ -21,6 +21,14 @@ class ApiError extends Error {
  * @param {Function} next - Express next function
  */
 const notFound = (req, res, next) => {
+  // Skip 404 handling for static resources to improve performance
+  if (req.path.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
+    return next();
+  }
+  
+  // Log 404 errors (optional)
+  logger.warn(`404 Not Found - ${req.method} ${req.originalUrl}`);
+  
   const error = new ApiError(`Not Found - ${req.originalUrl}`, 404);
   next(error);
 };
