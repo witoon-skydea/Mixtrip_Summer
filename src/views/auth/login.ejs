@@ -1,0 +1,71 @@
+<%- contentFor('body') %>
+
+<div class="auth-page">
+  <div class="container">
+    <div class="auth-container">
+      <div class="auth-box">
+        <div class="auth-header">
+          <h1 class="auth-title">Welcome Back</h1>
+          <p class="auth-subtitle">Log in to your account</p>
+        </div>
+        
+        <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+          <div class="alert alert-error">
+            <ul>
+              <% errors.forEach(function(error) { %>
+                <li><%= error.msg %></li>
+              <% }); %>
+            </ul>
+          </div>
+        <% } %>
+        
+        <form action="/auth/login" method="POST" class="auth-form" data-validate="true">
+          <div class="form-group">
+            <label for="username">Username or Email *</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              placeholder="Enter your username or email" 
+              value="<%= typeof formData !== 'undefined' ? formData.username : '' %>" 
+              required
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Enter your password" 
+              required
+            />
+          </div>
+          
+          <div class="form-group checkbox-group">
+            <div class="checkbox">
+              <input type="checkbox" id="remember" name="remember" value="true">
+              <label for="remember">Remember me</label>
+            </div>
+            <div class="forgot-password">
+              <a href="/auth/forgot-password">Forgot password?</a>
+            </div>
+          </div>
+          
+          <div class="form-action">
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+          </div>
+          
+          <div class="auth-alt">
+            <p>Don't have an account? <a href="/auth/register">Register</a></p>
+          </div>
+        </form>
+      </div>
+      
+      <div class="auth-image">
+        <img src="/images/auth/login.jpg" alt="Login Image">
+      </div>
+    </div>
+  </div>
+</div>

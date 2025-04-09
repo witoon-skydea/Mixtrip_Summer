@@ -1,0 +1,176 @@
+<%- contentFor('body') %>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Plan Your Perfect Trip with MixTrip</h1>
+            <p class="hero-subtitle">Create, share, and discover amazing travel itineraries</p>
+            <div class="hero-buttons">
+                <a href="/trips/create" class="btn btn-primary btn-lg">Create a Trip</a>
+                <a href="/trips/explore" class="btn btn-outline btn-lg">Explore Trips</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="/images/hero-image.jpg" alt="Travel Planning">
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <h2 class="section-title">Why Choose MixTrip</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3 class="feature-title">Easy Trip Planning</h3>
+                <p class="feature-desc">Create detailed travel itineraries with our intuitive planning tools</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3 class="feature-title">Share & Collaborate</h3>
+                <p class="feature-desc">Share your trips with friends and family or make them public</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="feature-title">Get Inspired</h3>
+                <p class="feature-desc">Discover amazing trips created by our global community</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-route"></i>
+                </div>
+                <h3 class="feature-title">Interactive Maps</h3>
+                <p class="feature-desc">Visualize your journey with interactive maps and directions</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Destinations -->
+<section class="destinations">
+    <div class="container">
+        <h2 class="section-title">Popular Destinations</h2>
+        <div class="destinations-grid">
+            <div class="destination-card">
+                <img src="/images/destinations/bangkok.jpg" alt="Bangkok" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>Bangkok</h3>
+                    <p>Thailand</p>
+                    <a href="/trips/explore?location=Bangkok" class="btn btn-sm btn-light">Explore</a>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="/images/destinations/chiang-mai.jpg" alt="Chiang Mai" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>Chiang Mai</h3>
+                    <p>Thailand</p>
+                    <a href="/trips/explore?location=Chiang+Mai" class="btn btn-sm btn-light">Explore</a>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="/images/destinations/phuket.jpg" alt="Phuket" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>Phuket</h3>
+                    <p>Thailand</p>
+                    <a href="/trips/explore?location=Phuket" class="btn btn-sm btn-light">Explore</a>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="/images/destinations/krabi.jpg" alt="Krabi" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>Krabi</h3>
+                    <p>Thailand</p>
+                    <a href="/trips/explore?location=Krabi" class="btn btn-sm btn-light">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/trips/explore" class="btn btn-outline">View All Destinations</a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Trips -->
+<section class="featured-trips">
+    <div class="container">
+        <h2 class="section-title">Featured Trips</h2>
+        <div class="trips-grid">
+            <!-- These would be dynamically generated in the actual implementation -->
+            <div class="trip-card">
+                <div class="trip-image">
+                    <img src="/images/trips/bangkok-weekend.jpg" alt="Bangkok Weekend Getaway">
+                    <div class="trip-duration"><i class="far fa-clock"></i> 3 days</div>
+                </div>
+                <div class="trip-content">
+                    <h3 class="trip-title">Bangkok Weekend Getaway</h3>
+                    <p class="trip-creator">by <a href="#">TravelExplorer</a></p>
+                    <p class="trip-desc">Experience the best of Bangkok in a weekend—explore temples, markets, and amazing food.</p>
+                    <div class="trip-meta">
+                        <span><i class="fas fa-heart"></i> 245</span>
+                        <span><i class="fas fa-eye"></i> 1.2k</span>
+                        <span><i class="fas fa-clone"></i> 32</span>
+                    </div>
+                    <a href="/trip/sample-1" class="btn btn-outline btn-block">View Trip</a>
+                </div>
+            </div>
+            
+            <div class="trip-card">
+                <div class="trip-image">
+                    <img src="/images/trips/chiang-mai-adventure.jpg" alt="Chiang Mai Adventure">
+                    <div class="trip-duration"><i class="far fa-clock"></i> 5 days</div>
+                </div>
+                <div class="trip-content">
+                    <h3 class="trip-title">Chiang Mai Adventure</h3>
+                    <p class="trip-creator">by <a href="#">NorthernThai</a></p>
+                    <p class="trip-desc">Discover Chiang Mai's ancient temples, mountain views, and unique cultural experiences.</p>
+                    <div class="trip-meta">
+                        <span><i class="fas fa-heart"></i> 187</span>
+                        <span><i class="fas fa-eye"></i> 950</span>
+                        <span><i class="fas fa-clone"></i> 28</span>
+                    </div>
+                    <a href="/trip/sample-2" class="btn btn-outline btn-block">View Trip</a>
+                </div>
+            </div>
+            
+            <div class="trip-card">
+                <div class="trip-image">
+                    <img src="/images/trips/phuket-beaches.jpg" alt="Phuket Beach Hopping">
+                    <div class="trip-duration"><i class="far fa-clock"></i> 7 days</div>
+                </div>
+                <div class="trip-content">
+                    <h3 class="trip-title">Phuket Beach Hopping</h3>
+                    <p class="trip-creator">by <a href="#">BeachLover</a></p>
+                    <p class="trip-desc">Explore the most beautiful beaches in Phuket with this comprehensive itinerary.</p>
+                    <div class="trip-meta">
+                        <span><i class="fas fa-heart"></i> 312</span>
+                        <span><i class="fas fa-eye"></i> 1.5k</span>
+                        <span><i class="fas fa-clone"></i> 45</span>
+                    </div>
+                    <a href="/trip/sample-3" class="btn btn-outline btn-block">View Trip</a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/trips/explore" class="btn btn-primary">Explore More Trips</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Plan Your Next Adventure?</h2>
+            <p>Join our community of travelers and start creating your perfect trip today.</p>
+            <a href="/auth/register" class="btn btn-primary btn-lg">Sign Up for Free</a>
+        </div>
+    </div>
+</section>

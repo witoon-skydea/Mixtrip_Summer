@@ -1,0 +1,99 @@
+<%- contentFor('body') %>
+
+<div class="auth-page">
+  <div class="container">
+    <div class="auth-container">
+      <div class="auth-box">
+        <div class="auth-header">
+          <h1 class="auth-title">Register</h1>
+          <p class="auth-subtitle">Create a new account and start planning your trips</p>
+        </div>
+        
+        <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+          <div class="alert alert-error">
+            <ul>
+              <% errors.forEach(function(error) { %>
+                <li><%= error.msg %></li>
+              <% }); %>
+            </ul>
+          </div>
+        <% } %>
+        
+        <form action="/auth/register" method="POST" class="auth-form" data-validate="true">
+          <div class="form-group">
+            <label for="username">Username *</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              placeholder="Choose a username" 
+              value="<%= typeof formData !== 'undefined' ? formData.username : '' %>" 
+              required
+            />
+            <small>Username must be 3-20 characters and can contain letters, numbers, and underscores.</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="Enter your email" 
+              value="<%= typeof formData !== 'undefined' ? formData.email : '' %>" 
+              required
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              placeholder="Enter your full name" 
+              value="<%= typeof formData !== 'undefined' ? formData.name : '' %>"
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Create a password" 
+              data-min-length="8"
+              required
+            />
+            <small>Password must be at least 8 characters long.</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password *</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              placeholder="Confirm your password" 
+              data-confirm-password="password"
+              required
+            />
+          </div>
+          
+          <div class="form-action">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+          
+          <div class="auth-alt">
+            <p>Already have an account? <a href="/auth/login">Log in</a></p>
+          </div>
+        </form>
+      </div>
+      
+      <div class="auth-image">
+        <img src="/images/auth/register.jpg" alt="Register Image">
+      </div>
+    </div>
+  </div>
+</div>
