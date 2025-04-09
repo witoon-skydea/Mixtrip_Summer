@@ -1,5 +1,14 @@
 # MixTrip Dev Log
 
+## C.v1.ph3.bugfix [2025-04-09]
+
+```devnote
+#bugfix.redirect
+-meta@index.html; ✓fix→infinite.redirect.loop
++commit→8d1f3e3; ✓issue→home.redir.loop
+✓test→app.load.ok; +UI→no.loop.now
+```
+
 ## C.v1.ph2 [2025-04-09]
 
 ```devnote
@@ -74,6 +83,13 @@ Privacy+Sharing→API+FE; +trip.explore.enh
 +form.val→name,coord.chk; +addr.fmt→autocmp
 +css→location.css; ✓ui→success/err.msg
 +err.hdl→form.valid; ✓exp→user.test
++mrkr.icn→grn.dot; ✓intg→maps.js@click.pos
++bounds.val→lat:±90°,lng:±180°; ✓init→BKK.dflt
++UI.ehc→load.ind+resp.style; +form→mtsk.sel
++addr.parse→fmt.addr.str; ✓CRUD→val.test
++flow.opt→err.recovery; +msg→anim.fade
++clean→btn.diab@proc; ✓XHR→hdrs.tkn
++git→push@4f0f1ca; ✓struct→MVC.pat
 ```
 
 ## 解読キー (AI専用)
