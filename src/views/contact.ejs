@@ -1,0 +1,390 @@
+<%- contentFor('body') %>
+
+<div class="contact-page">
+  <div class="container">
+    <div class="contact-header">
+      <h1 class="page-title">Contact Us</h1>
+      <p class="subtitle">We'd love to hear from you. Reach out with questions, feedback, or suggestions!</p>
+    </div>
+    
+    <div class="contact-content">
+      <div class="contact-form-container">
+        <div class="contact-info">
+          <h2 class="section-title">Get In Touch</h2>
+          
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="info-content">
+              <h3>Email</h3>
+              <p>support@mixtripapp.com</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="info-content">
+              <h3>Address</h3>
+              <p>123 Travel Street<br>Bangkok, 10330<br>Thailand</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="info-content">
+              <h3>Support Hours</h3>
+              <p>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 2pm<br>Sunday: Closed</p>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form">
+          <h2 class="section-title">Send Us a Message</h2>
+          
+          <% if (typeof success !== 'undefined' && success) { %>
+            <div class="alert alert-success">
+              <p>Your message has been sent successfully! We'll get back to you soon.</p>
+            </div>
+          <% } %>
+          
+          <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+            <div class="alert alert-error">
+              <ul>
+                <% errors.forEach(function(error) { %>
+                  <li><%= error.msg %></li>
+                <% }); %>
+              </ul>
+            </div>
+          <% } %>
+          
+          <form action="/contact" method="POST" data-validate="true">
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                placeholder="Your name" 
+                value="<%= typeof formData !== 'undefined' ? formData.name : '' %>" 
+                required
+              />
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="Your email address" 
+                value="<%= typeof formData !== 'undefined' ? formData.email : '' %>" 
+                required
+              />
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <input 
+                type="text" 
+                id="subject" 
+                name="subject" 
+                placeholder="What's this about?" 
+                value="<%= typeof formData !== 'undefined' ? formData.subject : '' %>" 
+                required
+              />
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                placeholder="Your message" 
+                rows="5" 
+                required
+              ><%= typeof formData !== 'undefined' ? formData.message : '' %></textarea>
+            </div>
+            
+            <div class="form-action">
+              <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="faq-section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-container">
+          <div class="faq-item">
+            <h3 class="faq-question">How do I create a trip on MixTrip?</h3>
+            <div class="faq-answer">
+              <p>Creating a trip is easy! Simply log in to your account, click on the "Create Trip" button, fill in the details like title, description, and dates, and save. You can then add locations and activities to your itinerary.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <h3 class="faq-question">Can I make my trips private?</h3>
+            <div class="faq-answer">
+              <p>Yes, you have full control over the privacy of your trips. When creating or editing a trip, you can set it to "Private" (only you can see it), "Followers" (only your followers can see it), "Link Sharing" (anyone with the link can see it), or "Public" (visible to everyone).</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <h3 class="faq-question">How do I add locations to my trip?</h3>
+            <div class="faq-answer">
+              <p>After creating a trip, you can add locations by clicking the "Add Locations" button. You can search for places or manually add custom locations. Each location includes details like address, coordinates, and additional information.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <h3 class="faq-question">What is "Remixing" a trip?</h3>
+            <div class="faq-answer">
+              <p>Remixing allows you to create a copy of another user's public trip and customize it for your own use. When you remix a trip, you get a duplicate of all its locations and activities, which you can then modify to suit your preferences.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <h3 class="faq-question">Is MixTrip available on mobile devices?</h3>
+            <div class="faq-answer">
+              <p>Yes, MixTrip is fully responsive and works on all devices including smartphones and tablets. You can access and manage your trips on the go, which is particularly useful during your travels.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Contact Page Styles */
+.contact-page {
+  padding: var(--spacing-xl) 0;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-title {
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-color);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-medium);
+}
+
+.contact-form-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--spacing-xl);
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.contact-info {
+  padding-right: var(--spacing-lg);
+  border-right: 1px solid var(--text-light);
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: var(--spacing-lg);
+}
+
+.info-icon {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-right: var(--spacing-md);
+  width: 30px;
+  text-align: center;
+}
+
+.info-content h3 {
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.125rem;
+}
+
+.info-content p {
+  color: var(--text-medium);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.social-links h3 {
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.125rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--background-off);
+  color: var(--primary-color);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.social-icon:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.section-title {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--primary-color);
+}
+
+.faq-section {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-xl);
+}
+
+.faq-container {
+  margin-top: var(--spacing-lg);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--text-light);
+  padding-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.faq-question {
+  font-size: 1.125rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-color);
+  cursor: pointer;
+  position: relative;
+  padding-right: 30px;
+}
+
+.faq-question::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.faq-question.active::after {
+  content: '-';
+}
+
+.faq-answer {
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+
+.alert {
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.alert-success {
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.5);
+  color: var(--success-color);
+}
+
+.alert-error {
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.5);
+  color: var(--error-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .contact-form-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-info {
+    padding-right: 0;
+    padding-bottom: var(--spacing-lg);
+    border-right: none;
+    border-bottom: 1px solid var(--text-light);
+    margin-bottom: var(--spacing-lg);
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        
+        // Toggle active class
+        question.classList.toggle('active');
+        
+        // Toggle visibility
+        if (question.classList.contains('active')) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+          answer.style.maxHeight = '0';
+        }
+      });
+    });
+    
+    // Initialize - hide all answers
+    document.querySelectorAll('.faq-answer').forEach(answer => {
+      answer.style.overflow = 'hidden';
+      answer.style.maxHeight = '0';
+      answer.style.transition = 'max-height 0.3s ease';
+    });
+  });
+</script>

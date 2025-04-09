@@ -1,0 +1,112 @@
+<%- contentFor('body') %>
+
+<div class="trip-form-page">
+  <div class="container">
+    <h1 class="page-title">Create New Trip</h1>
+    
+    <div class="trip-form-container">
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <div class="alert alert-error">
+          <ul>
+            <% errors.forEach(function(error) { %>
+              <li><%= error.msg %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+      
+      <form action="/trips/create" method="POST" class="trip-form" data-validate="true">
+        <!-- Basic Information Section -->
+        <div class="form-section">
+          <h2 class="form-section-title">Basic Information</h2>
+          
+          <div class="form-group">
+            <label for="title">Trip Title *</label>
+            <input 
+              type="text" 
+              id="title" 
+              name="title" 
+              placeholder="Give your trip a name" 
+              value="<%= typeof formData !== 'undefined' ? formData.title : '' %>" 
+              required
+              minlength="3"
+              maxlength="100"
+            />
+            <small>3-100 characters</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea 
+              id="description" 
+              name="description" 
+              placeholder="Describe your trip" 
+              rows="4"
+              maxlength="1000"
+            ><%= typeof formData !== 'undefined' ? formData.description : '' %></textarea>
+            <small>Maximum 1000 characters</small>
+          </div>
+          
+          <div class="form-group date-group">
+            <div class="date-input">
+              <label for="startDate">Start Date</label>
+              <input 
+                type="date" 
+                id="startDate" 
+                name="startDate" 
+                value="<%= typeof formData !== 'undefined' && formData.startDate ? formData.startDate : '' %>"
+              />
+            </div>
+            
+            <div class="date-input">
+              <label for="endDate">End Date</label>
+              <input 
+                type="date" 
+                id="endDate" 
+                name="endDate" 
+                value="<%= typeof formData !== 'undefined' && formData.endDate ? formData.endDate : '' %>"
+              />
+            </div>
+          </div>
+        </div>
+        
+        <!-- Privacy & Tags Section -->
+        <div class="form-section">
+          <h2 class="form-section-title">Privacy & Tags</h2>
+          
+          <div class="form-group">
+            <label for="privacy">Privacy Setting</label>
+            <select id="privacy" name="privacy">
+              <option value="public" <%= typeof formData !== 'undefined' && formData.privacy === 'public' ? 'selected' : '' %>>Public (Anyone can view)</option>
+              <option value="private" <%= typeof formData !== 'undefined' && formData.privacy === 'private' ? 'selected' : '' %>>Private (Only you can view)</option>
+              <option value="followers" <%= typeof formData !== 'undefined' && formData.privacy === 'followers' ? 'selected' : '' %>>Followers (Only your followers can view)</option>
+              <option value="link" <%= typeof formData !== 'undefined' && formData.privacy === 'link' ? 'selected' : '' %>>Link Sharing (Anyone with the link can view)</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <input 
+              type="text" 
+              id="tags" 
+              name="tags" 
+              placeholder="Add tags separated by commas (e.g. beach, family, adventure)" 
+              value="<%= typeof formData !== 'undefined' && formData.tags ? formData.tags : '' %>"
+            />
+            <small>Tags help others discover your trip</small>
+          </div>
+        </div>
+        
+        <div class="form-action">
+          <button type="submit" class="btn btn-primary btn-lg">Create Trip</button>
+          <a href="/trips/my-trips" class="btn btn-outline btn-lg">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<% if (typeof extraJS === 'undefined') { %>
+  <% extraJS = []; %>
+<% } %>
+<% extraJS.push('trips'); %>

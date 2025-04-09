@@ -1,0 +1,684 @@
+/**
+ * MixTrip Summer - Trip Styles
+ * Styles for trip-related pages
+ */
+
+/* Trip Detail Page */
+.trip-detail-page {
+  margin-bottom: var(--spacing-xxl);
+}
+
+.trip-header {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: var(--spacing-xxl) 0;
+  color: white;
+}
+
+.trip-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 1;
+}
+
+.trip-header-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.trip-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.trip-creator {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.creator-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: var(--spacing-sm);
+  border: 2px solid var(--primary-color);
+}
+
+.trip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-md);
+}
+
+.trip-meta-item {
+  display: flex;
+  align-items: center;
+  margin-right: var(--spacing-md);
+  font-size: 0.875rem;
+}
+
+.trip-meta-item i {
+  margin-right: var(--spacing-xs);
+  color: var(--primary-light);
+}
+
+.trip-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.trip-stat {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-pill);
+}
+
+.trip-stat i {
+  margin-right: var(--spacing-xs);
+}
+
+.like-button {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.like-button:hover {
+  transform: scale(1.2);
+}
+
+.like-button.fas {
+  color: var(--secondary-color);
+}
+
+.trip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.trip-content {
+  padding: var(--spacing-xl) 0;
+}
+
+.trip-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-xl);
+}
+
+.trip-section {
+  margin-bottom: var(--spacing-xl);
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--primary-color);
+}
+
+.trip-description {
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+
+.text-muted {
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Itinerary Timeline */
+.itinerary-timeline {
+  margin-top: var(--spacing-lg);
+}
+
+.timeline-day {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.timeline-day:last-child {
+  margin-bottom: 0;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.day-header h3 {
+  font-size: 1.25rem;
+  margin: 0;
+  margin-right: var(--spacing-md);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.day-date {
+  color: var(--text-medium);
+  font-size: 0.875rem;
+}
+
+.day-activities {
+  position: relative;
+  padding-left: var(--spacing-xl);
+  border-left: 2px dashed var(--primary-light);
+}
+
+.activity-item {
+  display: flex;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+}
+
+.activity-item::before {
+  content: '';
+  position: absolute;
+  left: -11px; /* Offset to center on border */
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary-light);
+  border-radius: 50%;
+  border: 3px solid white;
+}
+
+.activity-time {
+  width: 80px;
+  font-weight: 500;
+  color: var(--primary-color);
+  font-size: 0.875rem;
+}
+
+.activity-content {
+  flex: 1;
+  background-color: var(--background-off);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  border-left: 3px solid var(--primary-color);
+}
+
+.activity-title {
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.125rem;
+}
+
+.activity-location {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.875rem;
+  color: var(--text-medium);
+}
+
+.activity-location i {
+  margin-right: var(--spacing-xs);
+  color: var(--primary-color);
+}
+
+.activity-description {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-medium);
+  font-size: 0.875rem;
+}
+
+.activity-notes {
+  margin-bottom: 0;
+  padding-top: var(--spacing-xs);
+  border-top: 1px dashed var(--text-light);
+  font-size: 0.875rem;
+  color: var(--text-medium);
+  font-style: italic;
+}
+
+.activity-notes i {
+  margin-right: var(--spacing-xs);
+  color: var(--accent-color);
+}
+
+.empty-activities {
+  padding: var(--spacing-md);
+  text-align: center;
+  color: var(--text-medium);
+}
+
+.empty-itinerary {
+  padding: var(--spacing-md);
+  text-align: center;
+  color: var(--text-medium);
+}
+
+/* Sidebar */
+.trip-sidebar {
+  position: sticky;
+  top: var(--spacing-lg);
+  align-self: start;
+}
+
+.sidebar-section {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-lg);
+  overflow: hidden;
+}
+
+.sidebar-title {
+  font-size: 1.25rem;
+  padding: var(--spacing-md);
+  margin: 0;
+  border-bottom: 1px solid var(--text-light);
+}
+
+.trip-map {
+  height: 300px;
+  background-color: var(--background-off);
+}
+
+.map-placeholder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-medium);
+}
+
+.map-placeholder i {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-color);
+}
+
+.locations-list {
+  padding: var(--spacing-md);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.location-item {
+  display: flex;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--text-light);
+}
+
+.location-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.location-icon {
+  margin-right: var(--spacing-md);
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  width: 30px;
+  text-align: center;
+}
+
+.location-info {
+  flex: 1;
+}
+
+.location-name {
+  margin: 0;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1rem;
+}
+
+.location-address {
+  font-size: 0.875rem;
+  color: var(--text-medium);
+  margin-bottom: var(--spacing-xs);
+}
+
+.location-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.location-type {
+  font-size: 0.75rem;
+  background-color: var(--background-off);
+  padding: 2px 8px;
+  border-radius: var(--border-radius-pill);
+  color: var(--text-medium);
+}
+
+.empty-locations {
+  padding: var(--spacing-md);
+  text-align: center;
+  color: var(--text-medium);
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.is-active {
+  display: flex;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  margin: var(--spacing-md);
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--text-light);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text-medium);
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--error-color);
+}
+
+.modal-body {
+  padding: var(--spacing-md);
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.time-group {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.time-input {
+  flex: 1;
+}
+
+/* Share modal */
+.share-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.share-link-group label,
+.share-social label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 500;
+}
+
+.share-input-group {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.share-input-group input {
+  flex: 1;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--text-light);
+  border-radius: var(--border-radius-md);
+  font-size: 0.875rem;
+}
+
+.social-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.social-btn:hover {
+  transform: scale(1.1);
+}
+
+.social-btn.facebook {
+  background-color: #3b5998;
+}
+
+.social-btn.twitter {
+  background-color: #1da1f2;
+}
+
+.social-btn.whatsapp {
+  background-color: #25d366;
+}
+
+.social-btn.email {
+  background-color: #ea4335;
+}
+
+/* Trip Create & Edit Page */
+.trip-form-page {
+  padding: var(--spacing-xl) 0;
+}
+
+.trip-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-xl);
+}
+
+.form-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--text-light);
+}
+
+.date-group {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.date-input {
+  flex: 1;
+}
+
+/* Trip Listing */
+.trips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.trip-card {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.trip-image {
+  position: relative;
+  height: 200px;
+}
+
+.trip-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trip-duration {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-pill);
+  font-size: 0.875rem;
+}
+
+.trip-content {
+  padding: var(--spacing-lg);
+}
+
+.trip-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.trip-creator {
+  color: var(--text-medium);
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.trip-creator a {
+  font-weight: 500;
+}
+
+.trip-desc {
+  color: var(--text-medium);
+  margin-bottom: var(--spacing-md);
+  font-size: 0.875rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.trip-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-medium);
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .trip-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .trip-sidebar {
+    position: static;
+  }
+  
+  .trip-meta {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .time-group {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .trip-header-content {
+    text-align: center;
+  }
+  
+  .trip-creator {
+    justify-content: center;
+  }
+  
+  .trip-stats {
+    justify-content: center;
+  }
+  
+  .trip-actions {
+    justify-content: center;
+  }
+}

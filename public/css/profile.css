@@ -1,0 +1,441 @@
+/**
+ * MixTrip Summer - Profile Styles
+ * Styles for user profile and related pages
+ */
+
+/* Profile Header */
+.profile-header {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+.profile-image-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-image-upload {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: var(--spacing-xs) 0;
+  text-align: center;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-image-upload:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.profile-info {
+  flex-grow: 1;
+}
+
+.profile-name {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.profile-username {
+  font-size: 1.125rem;
+  color: var(--text-medium);
+  margin-bottom: var(--spacing-md);
+}
+
+.profile-bio {
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.profile-meta {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.profile-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-medium);
+  font-size: 0.875rem;
+}
+
+.profile-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.profile-follow-button {
+  color: white;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-follow-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.profile-edit-button {
+  color: var(--text-dark);
+  background-color: var(--background-off);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-edit-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Profile Tabs */
+.profile-tabs {
+  margin-bottom: var(--spacing-lg);
+}
+
+.tabs-list {
+  display: flex;
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-item {
+  flex: 1;
+  padding: var(--spacing-md);
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: var(--text-medium);
+}
+
+.tab-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.tab-item:hover:not(.active) {
+  background-color: var(--background-off);
+}
+
+.tab-content {
+  margin-top: var(--spacing-lg);
+}
+
+/* Profile Edit Form */
+.profile-edit-form {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--text-light);
+  padding-bottom: var(--spacing-sm);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--text-light);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.2);
+  outline: none;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-group small {
+  display: block;
+  color: var(--text-medium);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+}
+
+.toggle-group {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.toggle-option {
+  flex: 1;
+  background-color: var(--background-off);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.toggle-option.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--spacing-xl);
+}
+
+/* Security Settings */
+.security-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.security-option {
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.security-option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.security-option-title {
+  font-weight: 600;
+}
+
+.security-option-desc {
+  color: var(--text-medium);
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Activity Feed */
+.activity-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.activity-item {
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.activity-content {
+  flex-grow: 1;
+}
+
+.activity-text {
+  margin-bottom: var(--spacing-xs);
+}
+
+.activity-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-time {
+  font-size: 0.875rem;
+  color: var(--text-medium);
+}
+
+.activity-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.activity-action {
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.activity-action:hover {
+  text-decoration: underline;
+}
+
+/* Account Deactivation */
+.deactivation-box {
+  background-color: #ffebee;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.deactivation-title {
+  color: #c62828;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.deactivation-description {
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+.deactivation-button {
+  background-color: #c62828;
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.deactivation-button:hover {
+  background-color: #b71c1c;
+}
+
+/* Followers/Following Lists */
+.user-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.user-card {
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.user-card-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: var(--spacing-sm);
+}
+
+.user-card-name {
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.user-card-username {
+  color: var(--text-medium);
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.user-card-action {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .profile-meta {
+    justify-content: center;
+  }
+  
+  .profile-actions {
+    justify-content: center;
+  }
+  
+  .tabs-list {
+    flex-wrap: wrap;
+  }
+  
+  .tab-item {
+    min-width: 120px;
+  }
+}

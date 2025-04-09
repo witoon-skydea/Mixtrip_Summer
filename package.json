@@ -21,6 +21,14 @@
   ],
   "author": "MixTrip Team",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/witoonpongsilathong/Mixtrip_Summer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/witoonpongsilathong/Mixtrip_Summer/issues"
+  },
+  "homepage": "https://github.com/witoonpongsilathong/Mixtrip_Summer#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",

@@ -1,0 +1,249 @@
+/**
+ * MixTrip Summer - Form Styles
+ * Styles for forms and input elements
+ */
+
+/* Form Container */
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-xl);
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.form-group small {
+  display: block;
+  color: var(--text-medium);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+}
+
+/* Input Elements */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="tel"],
+.form-group input[type="url"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--text-light);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="time"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="url"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.2);
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23546e7a' width='18px' height='18px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+}
+
+/* Checkbox and Radio Groups */
+.checkbox-group,
+.radio-group {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xs);
+}
+
+.checkbox,
+.radio {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox input[type="checkbox"],
+.radio input[type="radio"] {
+  margin-right: var(--spacing-xs);
+}
+
+/* Form Actions */
+.form-action {
+  margin-top: var(--spacing-xl);
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.form-action .btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+/* Form Section */
+.form-section {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--text-light);
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+}
+
+/* Form Layouts */
+.form-row {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.form-col {
+  flex: 1;
+}
+
+/* Form Validation */
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+}
+
+/* File Upload */
+.file-upload {
+  margin-top: var(--spacing-xs);
+}
+
+.file-upload-label {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--background-off);
+  border: 1px dashed var(--text-light);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.file-upload-label:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-preview {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--background-off);
+  border-radius: var(--border-radius-md);
+  display: none;
+}
+
+.file-preview img {
+  max-width: 100%;
+  max-height: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.file-preview.has-file {
+  display: block;
+}
+
+/* Tags Input */
+.tags-input-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  border: 1px solid var(--text-light);
+  border-radius: var(--border-radius-md);
+  background-color: white;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 2px 8px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.875rem;
+}
+
+.tag-remove {
+  margin-left: var(--spacing-xs);
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.tags-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: var(--spacing-xs) 0;
+  min-width: 120px;
+}
+
+/* Responsive Forms */
+@media (max-width: 767px) {
+  .form-row {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .form-action {
+    flex-direction: column;
+  }
+  
+  .checkbox-group,
+  .radio-group {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}

@@ -1,42 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
-// const authController = require('../controllers/authController');
-// const authMiddleware = require('../middlewares/authMiddleware');
-
-// Temporary controller placeholders until we create the actual controllers
-const tempAuthController = {
-  register: (req, res) => {
-    res.render('auth/register-success', {
-      title: 'Registration Successful',
-      message: 'Registration functionality will be implemented in Phase 2'
-    });
-  },
-  login: (req, res) => {
-    // Simulate login (will be replaced with actual implementation)
-    req.session.user = {
-      username: req.body.username,
-      isLoggedIn: true
-    };
-    res.redirect('/');
-  },
-  logout: (req, res) => {
-    req.session.destroy();
-    res.redirect('/');
-  },
-  forgotPassword: (req, res) => {
-    res.render('auth/forgot-password-success', {
-      title: 'Password Reset Email Sent',
-      message: 'Password reset functionality will be implemented in Phase 2'
-    });
-  },
-  resetPassword: (req, res) => {
-    res.render('auth/reset-password-success', {
-      title: 'Password Reset Successful',
-      message: 'Password reset functionality will be implemented in Phase 2'
-    });
-  }
-};
+const authController = require('../controllers/authController');
+const { isAuthenticated } = require('../middlewares/authMiddleware');
 
 /**
  * @route   GET /auth/register
@@ -56,16 +22,27 @@ router.get('/register', (req, res) => {
  * @access  Public
  */
 router.post('/register', [
-  body('username').trim().isLength({ min: 3 }).escape(),
-  body('email').isEmail().normalizeEmail(),
-  body('password').isLength({ min: 8 }),
+  body('username')
+    .trim()
+    .isLength({ min: 3, max: 20 })
+    .withMessage('Username must be between 3 and 20 characters')
+    .matches(/^[a-zA-Z0-9_]+$/)
+    .withMessage('Username can only contain letters, numbers and underscores')
+    .escape(),
+  body('email')
+    .isEmail()
+    .withMessage('Please provide a valid email address')
+    .normalizeEmail(),
+  body('password')
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters long'),
   body('confirmPassword').custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error('Passwords do not match');
     }
     return true;
   })
-], tempAuthController.register);
+], authController.register);
 
 /**
  * @route   GET /auth/login
@@ -85,16 +62,21 @@ router.get('/login', (req, res) => {
  * @access  Public
  */
 router.post('/login', [
-  body('username').trim().escape(),
-  body('password').isLength({ min: 1 })
-], tempAuthController.login);
+  body('username')
+    .trim()
+    .notEmpty()
+    .withMessage('Username or email is required'),
+  body('password')
+    .notEmpty()
+    .withMessage('Password is required')
+], authController.login);
 
 /**
  * @route   GET /auth/logout
  * @desc    Logout user
  * @access  Private
  */
-router.get('/logout', tempAuthController.logout);
+router.get('/logout', isAuthenticated, authController.logout);
 
 /**
  * @route   GET /auth/forgot-password
@@ -114,21 +96,18 @@ router.get('/forgot-password', (req, res) => {
  * @access  Public
  */
 router.post('/forgot-password', [
-  body('email').isEmail().normalizeEmail()
-], tempAuthController.forgotPassword);
+  body('email')
+    .isEmail()
+    .withMessage('Please provide a valid email address')
+    .normalizeEmail()
+], authController.forgotPassword);
 
 /**
  * @route   GET /auth/reset-password/:token
  * @desc    Show reset password form
  * @access  Public
  */
-router.get('/reset-password/:token', (req, res) => {
-  res.render('auth/reset-password', {
-    title: 'Reset Password',
-    token: req.params.token,
-    user: null
-  });
-});
+router.get('/reset-password/:token', authController.resetPasswordForm);
 
 /**
  * @route   POST /auth/reset-password/:token
@@ -136,13 +115,22 @@ router.get('/reset-password/:token', (req, res) => {
  * @access  Public
  */
 router.post('/reset-password/:token', [
-  body('password').isLength({ min: 8 }),
+  body('password')
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters long'),
   body('confirmPassword').custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error('Passwords do not match');
     }
     return true;
   })
-], tempAuthController.resetPassword);
+], authController.resetPassword);
+
+/**
+ * @route   GET /auth/me
+ * @desc    Get current user
+ * @access  Private
+ */
+router.get('/me', isAuthenticated, authController.getMe);
 
 module.exports = router;

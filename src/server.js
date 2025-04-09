@@ -9,6 +9,13 @@ const session = require('express-session');
 const logger = require('./utils/logger');
 const { connectDB } = require('./config/database');
 const appConfig = require('./config/app');
+const { 
+  notFound, 
+  errorHandler,
+  validationErrorHandler,
+  duplicateKeyErrorHandler
+} = require('./middlewares/errorMiddleware');
+const { attachUser } = require('./middlewares/authMiddleware');
 require('dotenv').config();
 
 // Initialize app
@@ -66,13 +73,24 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const tripRoutes = require('./routes/trip');
 const locationRoutes = require('./routes/location');
+const apiRoutes = require('./routes/api/index');
 
-// Routes
+// Apply CSRF protection (if needed later)
+// const { csrfProtection } = require('./middlewares/csrfMiddleware');
+// app.use(csrfProtection);
+
+// Web routes
 app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 app.use('/profile', userRoutes);
 app.use('/trips', tripRoutes);
 app.use('/locations', locationRoutes);
+
+// API routes
+app.use('/api', apiRoutes);
+
+// User middleware
+app.use(attachUser);
 
 // Global variables middleware
 app.use((req, res, next) => {
@@ -86,26 +104,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// 404 route
-app.use((req, res, next) => {
-  res.status(404).render('error', {
-    title: 'Page Not Found',
-    message: 'The page you are looking for does not exist.',
-    error: { status: 404 }
-  });
-});
-
-// Error handler
-app.use((err, req, res, next) => {
-  const statusCode = err.status || 500;
-  console.error(err.stack);
-  
-  res.status(statusCode).render('error', {
-    title: 'Error',
-    message: err.message || 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err : {}
-  });
-});
+// Error handling middlewares
+app.use(validationErrorHandler);
+app.use(duplicateKeyErrorHandler);
+app.use(notFound);
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {

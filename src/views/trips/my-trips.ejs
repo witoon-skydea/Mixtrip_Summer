@@ -1,0 +1,201 @@
+<%- contentFor('body') %>
+
+<div class="my-trips-page">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">My Trips</h1>
+      
+      <div class="page-actions">
+        <a href="/trips/create" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Create New Trip
+        </a>
+      </div>
+    </div>
+    
+    <div class="trips-filter">
+      <form action="/trips/my-trips" method="GET" class="filter-form">
+        <div class="filter-group">
+          <label for="status">Status</label>
+          <select id="status" name="status" onchange="this.form.submit()">
+            <option value="">All Statuses</option>
+            <option value="planning" <%= filters.status === 'planning' ? 'selected' : '' %>>Planning</option>
+            <option value="completed" <%= filters.status === 'completed' ? 'selected' : '' %>>Completed</option>
+            <option value="in-progress" <%= filters.status === 'in-progress' ? 'selected' : '' %>>In Progress</option>
+            <option value="cancelled" <%= filters.status === 'cancelled' ? 'selected' : '' %>>Cancelled</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="sort">Sort By</label>
+          <select id="sort" name="sort" onchange="this.form.submit()">
+            <option value="newest" <%= filters.sort === 'newest' ? 'selected' : '' %>>Newest First</option>
+            <option value="oldest" <%= filters.sort === 'oldest' ? 'selected' : '' %>>Oldest First</option>
+            <option value="title-asc" <%= filters.sort === 'title-asc' ? 'selected' : '' %>>Title (A-Z)</option>
+            <option value="title-desc" <%= filters.sort === 'title-desc' ? 'selected' : '' %>>Title (Z-A)</option>
+            <option value="start-date" <%= filters.sort === 'start-date' ? 'selected' : '' %>>Start Date</option>
+            <option value="popularity" <%= filters.sort === 'popularity' ? 'selected' : '' %>>Most Viewed</option>
+          </select>
+        </div>
+      </form>
+    </div>
+    
+    <% if (trips && trips.length > 0) { %>
+      <div class="trips-grid">
+        <% trips.forEach(function(trip) { %>
+          <div class="trip-card">
+            <div class="trip-image">
+              <img src="<%= trip.coverImage ? `/images/trips/${trip.coverImage}` : '/images/trips/default-trip-cover.jpg' %>" alt="<%= trip.title %>">
+              <div class="trip-duration">
+                <i class="far fa-clock"></i> <%= trip.duration ? `${trip.duration} days` : 'Duration not set' %>
+              </div>
+            </div>
+            
+            <div class="trip-content">
+              <h2 class="trip-title">
+                <a href="/trips/<%= trip._id %>"><%= trip.title %></a>
+              </h2>
+              
+              <div class="trip-status <%= trip.status %>">
+                <span class="status-indicator"></span>
+                <span class="status-text"><%= trip.status.charAt(0).toUpperCase() + trip.status.slice(1).replace('-', ' ') %></span>
+              </div>
+              
+              <p class="trip-desc"><%= trip.description || 'No description provided.' %></p>
+              
+              <div class="trip-meta">
+                <div class="trip-meta-item">
+                  <i class="fas fa-calendar-alt"></i>
+                  <% if (trip.startDate && trip.endDate) { %>
+                    <%= new Date(trip.startDate).toLocaleDateString() %> - 
+                    <%= new Date(trip.endDate).toLocaleDateString() %>
+                  <% } else { %>
+                    Not scheduled
+                  <% } %>
+                </div>
+                
+                <div class="trip-meta-item">
+                  <i class="fas fa-eye"></i>
+                  <%= trip.views %> views
+                </div>
+              </div>
+              
+              <div class="trip-actions">
+                <a href="/trips/<%= trip._id %>" class="btn btn-outline btn-sm">View</a>
+                <a href="/trips/<%= trip._id %>/edit" class="btn btn-primary btn-sm">Edit</a>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <div class="empty-trips">
+        <div class="empty-icon">
+          <i class="fas fa-route"></i>
+        </div>
+        <h2>No trips found</h2>
+        <p>You haven't created any trips yet. Start planning your adventures!</p>
+        <a href="/trips/create" class="btn btn-primary">Create Your First Trip</a>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<style>
+  /* Custom status colors */
+  .trip-status {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.875rem;
+  }
+  
+  .status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: var(--spacing-xs);
+  }
+  
+  .trip-status.planning .status-indicator {
+    background-color: var(--primary-color);
+  }
+  
+  .trip-status.completed .status-indicator {
+    background-color: var(--success-color);
+  }
+  
+  .trip-status.in-progress .status-indicator {
+    background-color: var(--accent-color);
+  }
+  
+  .trip-status.cancelled .status-indicator {
+    background-color: var(--error-color);
+  }
+  
+  .empty-trips {
+    padding: var(--spacing-xxl);
+    text-align: center;
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .empty-icon {
+    font-size: 4rem;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .trips-filter {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .filter-form {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filter-group label {
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--text-medium);
+  }
+  
+  .filter-group select {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--text-light);
+    border-radius: var(--border-radius-md);
+    background-color: white;
+    min-width: 150px;
+  }
+  
+  @media (max-width: 767px) {
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+    }
+    
+    .filter-form {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+  }
+</style>

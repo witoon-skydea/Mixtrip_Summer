@@ -1,0 +1,341 @@
+<%- contentFor('body') %>
+
+<div class="about-page">
+  <div class="container">
+    <div class="about-header">
+      <h1 class="page-title">About MixTrip Summer</h1>
+      <p class="subtitle">Your travel planning companion for unforgettable adventures</p>
+    </div>
+    
+    <div class="about-content">
+      <div class="about-section">
+        <h2 class="section-title">Our Story</h2>
+        <div class="section-content">
+          <p>MixTrip Summer was born from a simple idea: to make travel planning easier, more social, and more fun. Our team of passionate travelers and tech enthusiasts came together to create a platform that combines the best of trip planning tools with social sharing features.</p>
+          
+          <p>We believe that planning a trip should be almost as enjoyable as the trip itself. With MixTrip, you can organize your itinerary with ease, discover amazing destinations through our community, and share your adventures with friends and fellow travelers.</p>
+          
+          <p>Whether you're a seasoned globetrotter or planning your first big adventure, MixTrip Summer is designed to help you create the perfect travel experience.</p>
+        </div>
+      </div>
+      
+      <div class="about-section">
+        <h2 class="section-title">Our Mission</h2>
+        <div class="section-content">
+          <div class="mission-content">
+            <p>Our mission is to empower travelers to create memorable journeys by providing intuitive planning tools and fostering a community of exploration and sharing.</p>
+            
+            <p>We strive to:</p>
+            <ul class="mission-list">
+              <li>Make travel planning simple and accessible for everyone</li>
+              <li>Help travelers discover new destinations and experiences</li>
+              <li>Build a supportive community of passionate explorers</li>
+              <li>Inspire people to see more of the world and share their adventures</li>
+            </ul>
+          </div>
+          <div class="mission-image">
+            <img src="/images/about/mission.jpg" alt="Travel Planning" class="rounded-image">
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-section">
+        <h2 class="section-title">Our Team</h2>
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-image">
+              <img src="/images/team/team1.jpg" alt="Team Member">
+            </div>
+            <h3 class="member-name">Somchai P.</h3>
+            <p class="member-role">Founder & CEO</p>
+            <p class="member-bio">Avid traveler with a passion for technology. Visited over 40 countries and counting.</p>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="/images/team/team2.jpg" alt="Team Member">
+            </div>
+            <h3 class="member-name">Malee S.</h3>
+            <p class="member-role">UX Designer</p>
+            <p class="member-bio">Creates beautiful, intuitive interfaces with the traveler's experience in mind.</p>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="/images/team/team3.jpg" alt="Team Member">
+            </div>
+            <h3 class="member-name">Apirak K.</h3>
+            <p class="member-role">Lead Developer</p>
+            <p class="member-bio">Code wizard who turns ideas into reality. Loves hiking and outdoor adventures.</p>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="/images/team/team4.jpg" alt="Team Member">
+            </div>
+            <h3 class="member-name">Pranee L.</h3>
+            <p class="member-role">Content Strategist</p>
+            <p class="member-bio">Travel writer and photographer with a keen eye for hidden gems around the world.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-section">
+        <h2 class="section-title">Our Features</h2>
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-map-marked-alt"></i>
+            </div>
+            <div class="feature-info">
+              <h3>Trip Planning</h3>
+              <p>Create detailed day-by-day itineraries with locations, activities, and notes. Organize your trip exactly how you want it.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-map"></i>
+            </div>
+            <div class="feature-info">
+              <h3>Interactive Maps</h3>
+              <p>Visualize your journey with interactive maps. See all your planned locations and get a better sense of your travel route.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="feature-info">
+              <h3>Social Sharing</h3>
+              <p>Share your trips with friends or the MixTrip community. Control privacy settings to decide who sees your adventures.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-clone"></i>
+            </div>
+            <div class="feature-info">
+              <h3>Trip Remixing</h3>
+              <p>Find a trip you love? Remix it to create your own version with your personal touches and preferences.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="feature-info">
+              <h3>Discover</h3>
+              <p>Explore trips created by other travelers. Get inspired and find new destinations for your bucket list.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="feature-info">
+              <h3>Mobile Friendly</h3>
+              <p>Access your trips on the go with our mobile-friendly design. Perfect for checking your itinerary while traveling.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-section cta-section">
+        <h2 class="section-title">Join Our Community</h2>
+        <p>Ready to start planning your next adventure? Join MixTrip Summer today and become part of our growing community of travel enthusiasts.</p>
+        <div class="cta-buttons">
+          <% if (user) { %>
+            <a href="/trips/create" class="btn btn-primary btn-lg">Create a Trip</a>
+            <a href="/trips/explore" class="btn btn-outline btn-lg">Explore Trips</a>
+          <% } else { %>
+            <a href="/auth/register" class="btn btn-primary btn-lg">Sign Up Now</a>
+            <a href="/trips/explore" class="btn btn-outline btn-lg">Explore Trips</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* About Page Styles */
+.about-page {
+  padding: var(--spacing-xl) 0;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-title {
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-color);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-medium);
+}
+
+.about-section {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--primary-color);
+}
+
+.section-content {
+  display: flex;
+  gap: var(--spacing-xl);
+}
+
+.mission-content {
+  flex: 2;
+}
+
+.mission-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rounded-image {
+  width: 100%;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.mission-list {
+  padding-left: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+}
+
+.mission-list li {
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.6;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.team-member {
+  text-align: center;
+}
+
+.member-image {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto var(--spacing-md);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-name {
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.25rem;
+}
+
+.member-role {
+  color: var(--primary-color);
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+}
+
+.member-bio {
+  color: var(--text-medium);
+  font-size: 0.875rem;
+}
+
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.feature-item {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+  width: 60px;
+  text-align: center;
+}
+
+.feature-info h3 {
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.25rem;
+}
+
+.feature-info p {
+  color: var(--text-medium);
+  font-size: 0.95rem;
+}
+
+.cta-section {
+  text-align: center;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  .section-content {
+    flex-direction: column;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .features-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+</style>
