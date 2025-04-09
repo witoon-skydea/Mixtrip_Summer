@@ -1,29 +1,90 @@
 /**
  * MixTrip Summer - Maps JavaScript
- * Contains functionality for maps
+ * Contains functionality for maps with Google Maps and fallback to OpenStreetMap
  */
+
+// Maps configuration (populated from server)
+const MapsConfig = window.MixTrip?.config?.maps || {
+  provider: 'google', // Default provider
+  google: {
+    apiKey: '',
+    libraries: ['places'],
+    defaultCenter: { lat: 13.7563, lng: 100.5018 }, // Bangkok
+    defaultZoom: 13
+  },
+  osm: {
+    tileServer: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    defaultCenter: { lat: 13.7563, lng: 100.5018 }, // Bangkok
+    defaultZoom: 13
+  }
+};
+
+// Track if OpenStreetMap libraries are loaded
+let leafletLoaded = false;
+
+// Helper function to load Leaflet (OpenStreetMap) scripts
+function loadLeaflet(callback) {
+  if (leafletLoaded) {
+    callback();
+    return;
+  }
+  
+  // Load Leaflet CSS
+  const leafletCss = document.createElement('link');
+  leafletCss.rel = 'stylesheet';
+  leafletCss.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  leafletCss.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+  leafletCss.crossOrigin = '';
+  document.head.appendChild(leafletCss);
+  
+  // Load Leaflet JS
+  const leafletJs = document.createElement('script');
+  leafletJs.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  leafletJs.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+  leafletJs.crossOrigin = '';
+  
+  leafletJs.onload = () => {
+    leafletLoaded = true;
+    callback();
+  };
+  
+  document.head.appendChild(leafletJs);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // Trip Map Initialization
   const tripMap = document.getElementById('tripMap');
   
   if (tripMap) {
-    // Load Google Maps API
-    if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-      // Create script element for Google Maps API
-      const script = document.createElement('script');
-      script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places';
-      script.defer = true;
-      script.async = true;
-      
-      // Initialize map when API is loaded
-      script.onload = initMap;
-      
-      // Append script to document
-      document.head.appendChild(script);
+    if (MapsConfig.provider === 'google') {
+      // Load Google Maps API with proper API key
+      if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+        // Create script element for Google Maps API
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${MapsConfig.google.apiKey}&libraries=${MapsConfig.google.libraries.join(',')}`;
+        script.defer = true;
+        script.async = true;
+        
+        // Initialize map when API is loaded
+        script.onload = initMap;
+        
+        // Handle Google Maps API load error
+        script.onerror = () => {
+          console.warn('Google Maps API failed to load. Falling back to OpenStreetMap.');
+          // Switch to OpenStreetMap
+          loadLeaflet(() => initOpenStreetMap('tripMap'));
+        };
+        
+        // Append script to document
+        document.head.appendChild(script);
+      } else {
+        // API already loaded, initialize map
+        initMap();
+      }
     } else {
-      // API already loaded, initialize map
-      initMap();
+      // Use OpenStreetMap
+      loadLeaflet(() => initOpenStreetMap('tripMap'));
     }
   }
   
@@ -164,16 +225,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const locationMap = document.getElementById('locationMap');
   
   if (locationMap) {
-    // Initialize location map when API is loaded
-    if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-      const script = document.createElement('script');
-      script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places';
-      script.defer = true;
-      script.async = true;
-      script.onload = initLocationMap;
-      document.head.appendChild(script);
+    if (MapsConfig.provider === 'google') {
+      // Initialize location map when API is loaded
+      if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${MapsConfig.google.apiKey}&libraries=${MapsConfig.google.libraries.join(',')}`;
+        script.defer = true;
+        script.async = true;
+        script.onload = initLocationMap;
+        script.onerror = () => {
+          console.warn('Google Maps API failed to load. Falling back to OpenStreetMap.');
+          loadLeaflet(() => initOpenStreetMapLocation('locationMap'));
+        };
+        document.head.appendChild(script);
+      } else {
+        initLocationMap();
+      }
     } else {
-      initLocationMap();
+      // Use OpenStreetMap for location detail
+      loadLeaflet(() => initOpenStreetMapLocation('locationMap'));
     }
   }
   
@@ -228,16 +298,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const locationSearchMap = document.getElementById('locationSearchMap');
   
   if (locationSearchMap) {
-    // Initialize location search map when API is loaded
-    if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-      const script = document.createElement('script');
-      script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places';
-      script.defer = true;
-      script.async = true;
-      script.onload = initLocationSearchMap;
-      document.head.appendChild(script);
+    if (MapsConfig.provider === 'google') {
+      // Initialize location search map when API is loaded
+      if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${MapsConfig.google.apiKey}&libraries=${MapsConfig.google.libraries.join(',')}`;
+        script.defer = true;
+        script.async = true;
+        script.onload = initLocationSearchMap;
+        script.onerror = () => {
+          console.warn('Google Maps API failed to load. Falling back to OpenStreetMap.');
+          loadLeaflet(() => initOpenStreetMapSearch('locationSearchMap'));
+        };
+        document.head.appendChild(script);
+      } else {
+        initLocationSearchMap();
+      }
     } else {
-      initLocationSearchMap();
+      // Use OpenStreetMap for location search
+      loadLeaflet(() => initOpenStreetMapSearch('locationSearchMap'));
     }
   }
   

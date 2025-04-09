@@ -1,0 +1,102 @@
+/**
+ * MixTrip Summer - Dark Theme
+ * Dark color scheme and styles
+ */
+
+:root {
+  /* Color palette */
+  --primary-color: #64b5f6;
+  --primary-dark: #1e88e5;
+  --primary-light: #90caf9;
+  --secondary-color: #ff8a65;
+  --secondary-dark: #e64a19;
+  --secondary-light: #ffab91;
+  --accent-color: #ffd54f;
+  --text-dark: #f5f5f5;
+  --text-medium: #b0bec5;
+  --text-light: #78909c;
+  --background-light: #263238;
+  --background-off: #1e272c;
+  --success-color: #66bb6a;
+  --warning-color: #ffa726;
+  --error-color: #ef5350;
+  --info-color: #42a5f5;
+  
+  /* Typography */
+  --font-primary: 'Prompt', sans-serif;
+  --font-secondary: 'Kanit', sans-serif;
+  
+  /* Borders */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-pill: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.36);
+  --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.30), 0 2px 4px rgba(0, 0, 0, 0.24);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.30), 0 3px 6px rgba(0, 0, 0, 0.20);
+  --shadow-xl: 0 15px 25px rgba(0, 0, 0, 0.30), 0 5px 10px rgba(0, 0, 0, 0.10);
+  
+  /* Other theme variables */
+  --card-hover-transform: translateY(-5px);
+  --button-hover-transform: translateY(-2px);
+  --animation-timing: 0.3s ease;
+}
+
+/* Dark theme specific overrides */
+body {
+  background-color: var(--background-off);
+  color: var(--text-dark);
+}
+
+.header, 
+.footer {
+  background-color: var(--background-light);
+}
+
+.card, 
+.form-container, 
+.alert, 
+.modal-dialog {
+  background-color: var(--background-light);
+  border-color: var(--text-light);
+}
+
+input, 
+select, 
+textarea {
+  background-color: var(--background-off);
+  color: var(--text-dark);
+  border-color: var(--text-light);
+}
+
+input:focus, 
+select:focus, 
+textarea:focus {
+  border-color: var(--primary-color);
+  background-color: rgba(30, 136, 229, 0.1);
+}
+
+a {
+  color: var(--primary-light);
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+.btn-light {
+  background-color: var(--background-light);
+  color: var(--text-dark);
+}
+
+.btn-outline {
+  color: var(--primary-light);
+  border-color: var(--primary-light);
+}
+
+.toast {
+  background-color: var(--background-light);
+  color: var(--text-dark);
+}

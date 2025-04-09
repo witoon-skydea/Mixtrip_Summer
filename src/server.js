@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const ejsLayouts = require('express-ejs-layouts');
 const logger = require('./utils/logger');
 const { connectDB } = require('./config/database');
 const appConfig = require('./config/app');
@@ -25,6 +26,10 @@ const PORT = process.env.PORT || 3000;
 // Set view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+// Set up EJS Layouts
+app.use(ejsLayouts);
+app.set('layout', 'layouts/main');
 
 // Middlewares
 app.use(helmet({

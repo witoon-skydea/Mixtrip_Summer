@@ -69,8 +69,15 @@ router.put('/:id',
 router.delete('/:id', isAuthenticated, locationController.deleteLocation);
 
 /**
+ * @route   GET /locations/search-page
+ * @desc    Show location search page
+ * @access  Public
+ */
+router.get('/search-page', locationController.getSearchPage);
+
+/**
  * @route   GET /locations/search
- * @desc    Search locations
+ * @desc    Search locations API
  * @access  Public
  */
 router.get('/search', locationController.searchLocations);

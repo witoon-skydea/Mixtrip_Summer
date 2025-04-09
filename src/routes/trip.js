@@ -118,6 +118,13 @@ router.post('/:id/delete', isAuthenticated, tripController.deleteTrip);
 router.get('/my-trips', isAuthenticated, tripController.getUserTrips);
 
 /**
+ * @route   GET /trips/my-trips/list-json
+ * @desc    Get user's trips as JSON for API usage
+ * @access  Private
+ */
+router.get('/my-trips/list-json', isAuthenticated, tripController.getUserTripsJson);
+
+/**
  * @route   POST /trips/:id/like
  * @desc    Like or unlike a trip
  * @access  Private

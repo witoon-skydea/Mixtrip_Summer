@@ -1,0 +1,494 @@
+<%- contentFor('body') %>
+
+<div class="location-search-page">
+  <div class="container">
+    <div class="search-header">
+      <% if (typeof tripId !== 'undefined' && tripId) { %>
+        <h1 class="page-title">Add Locations to Your Trip</h1>
+        <p class="page-subtitle">Search for places to add to your itinerary</p>
+      <% } else { %>
+        <h1 class="page-title">Discover Locations</h1>
+        <p class="page-subtitle">Find interesting places for your next trip</p>
+      <% } %>
+      
+      <div class="search-form">
+        <div class="search-input-group">
+          <i class="fas fa-search search-icon"></i>
+          <input 
+            type="text" 
+            id="locationSearchInput" 
+            placeholder="Search for places, attractions, restaurants, etc." 
+            class="search-input"
+          >
+        </div>
+        
+        <div class="search-filters">
+          <div class="filter-item">
+            <label for="typeFilter">Type</label>
+            <select id="typeFilter" class="form-control">
+              <option value="all">All Types</option>
+              <option value="accommodation">Accommodation</option>
+              <option value="restaurant">Restaurant</option>
+              <option value="cafe">Cafe</option>
+              <option value="bar">Bar</option>
+              <option value="attraction">Attraction</option>
+              <option value="museum">Museum</option>
+              <option value="park">Park</option>
+              <option value="beach">Beach</option>
+              <option value="shopping">Shopping</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="temple">Temple</option>
+              <option value="landmark">Landmark</option>
+              <option value="transportation">Transportation</option>
+              <option value="viewpoint">Viewpoint</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <button id="searchButton" class="btn btn-primary">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-content">
+      <div class="search-results-container">
+        <div class="map-container">
+          <div id="locationSearchMap" class="search-map" data-existing-locations="<%= JSON.stringify(existingLocations || []) %>">
+            <!-- Map will be loaded here -->
+          </div>
+        </div>
+        
+        <div id="searchResults" class="search-results">
+          <div class="results-header">
+            <h2 class="results-title">Search Results</h2>
+            <div class="results-count">
+              <span id="resultsCountDisplay">0 locations found</span>
+            </div>
+          </div>
+          
+          <div class="results-list" id="resultsList">
+            <!-- Results will be loaded here -->
+            <div class="empty-results">
+              <i class="fas fa-search"></i>
+              <p>Search for locations to see results</p>
+              <p class="hint">You can search by name, city, or points of interest</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="search-info">
+        <div class="info-section">
+          <h3>How to Add Locations</h3>
+          <ol class="info-steps">
+            <li>Search for a location using the search box above</li>
+            <li>Click on a marker on the map or a location in the results list</li>
+            <li>Click "Add to Trip" in the popup window</li>
+            <li>The location will be added to your trip</li>
+          </ol>
+          
+          <% if (typeof tripId !== 'undefined' && tripId) { %>
+            <a href="/trips/<%= tripId %>" class="btn btn-outline btn-lg mt-4">
+              <i class="fas fa-arrow-left"></i> Back to Trip
+            </a>
+          <% } %>
+        </div>
+        
+        <div class="info-section">
+          <h3>Create Your Own Location</h3>
+          <p>Can't find what you're looking for? Create a custom location by clicking directly on the map or using the button below.</p>
+          <button id="createLocationBtn" class="btn btn-primary btn-lg mt-2">
+            <i class="fas fa-plus"></i> Create Custom Location
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Custom Location Modal (Hidden by default) -->
+<div class="modal" id="createLocationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Custom Location</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="createLocationForm">
+          <div class="form-group">
+            <label for="newLocationName">Name *</label>
+            <input type="text" id="newLocationName" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="newLocationDescription">Description</label>
+            <textarea id="newLocationDescription" name="description" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label>Coordinates *</label>
+            <div class="coordinates-inputs">
+              <div class="coordinate-input">
+                <label for="newLocationLat">Latitude</label>
+                <input type="number" id="newLocationLat" name="coordinates.lat" step="0.000001" required>
+              </div>
+              <div class="coordinate-input">
+                <label for="newLocationLng">Longitude</label>
+                <input type="number" id="newLocationLng" name="coordinates.lng" step="0.000001" required>
+              </div>
+            </div>
+            <small>Click on the map to set coordinates or enter manually</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="newLocationType">Type</label>
+            <select id="newLocationType" name="types" multiple>
+              <option value="accommodation">Accommodation</option>
+              <option value="restaurant">Restaurant</option>
+              <option value="cafe">Cafe</option>
+              <option value="bar">Bar</option>
+              <option value="attraction">Attraction</option>
+              <option value="museum">Museum</option>
+              <option value="park">Park</option>
+              <option value="beach">Beach</option>
+              <option value="shopping">Shopping</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="temple">Temple</option>
+              <option value="landmark">Landmark</option>
+              <option value="transportation">Transportation</option>
+              <option value="viewpoint">Viewpoint</option>
+              <option value="other" selected>Other</option>
+            </select>
+            <small>Hold Ctrl/Cmd to select multiple types</small>
+          </div>
+          
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" id="newLocationStreet" name="address.street" placeholder="Street">
+            <div class="address-inputs">
+              <input type="text" id="newLocationCity" name="address.city" placeholder="City">
+              <input type="text" id="newLocationState" name="address.state" placeholder="State/Province">
+            </div>
+            <div class="address-inputs">
+              <input type="text" id="newLocationCountry" name="address.country" placeholder="Country">
+              <input type="text" id="newLocationPostal" name="address.postalCode" placeholder="Postal Code">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="newLocationWebsite">Website</label>
+            <input type="url" id="newLocationWebsite" name="website" placeholder="https://example.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="newLocationPhone">Phone</label>
+            <input type="text" id="newLocationPhone" name="contactInfo.phone">
+          </div>
+          
+          <div class="form-group">
+            <label for="newLocationTags">Tags</label>
+            <input type="text" id="newLocationTags" name="tags" placeholder="Add tags separated by commas">
+          </div>
+          
+          <input type="hidden" id="newLocationTripId" name="tripId" value="<%= typeof tripId !== 'undefined' ? tripId : '' %>">
+          
+          <div class="form-action">
+            <button type="submit" class="btn btn-primary">Create Location</button>
+            <button type="button" class="btn btn-outline modal-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if (typeof extraJS === 'undefined') { %>
+  <% extraJS = []; %>
+<% } %>
+<% extraJS.push('locations'); %>
+<% extraJS.push('maps'); %>
+
+<style>
+  /* Location Search Page Specific Styles */
+  .location-search-page {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .search-header {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .page-subtitle {
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .search-form {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .search-input-group {
+    position: relative;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-medium);
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 40px;
+    border: 1px solid var(--text-light);
+    border-radius: var(--border-radius-md);
+    font-size: 1rem;
+  }
+  
+  .search-filters {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-end;
+  }
+  
+  .filter-item {
+    flex: 1;
+  }
+  
+  .filter-item label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+  }
+  
+  .search-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+  }
+  
+  .search-results-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .map-container {
+    height: 400px;
+    background-color: var(--background-off);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .search-map {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .search-results {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  
+  .results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--text-light);
+  }
+  
+  .results-title {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .results-count {
+    color: var(--text-medium);
+    font-size: 0.875rem;
+  }
+  
+  .results-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+  }
+  
+  .empty-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl) 0;
+    color: var(--text-medium);
+    text-align: center;
+  }
+  
+  .empty-results i {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-light);
+  }
+  
+  .empty-results .hint {
+    font-size: 0.875rem;
+    margin-top: var(--spacing-sm);
+  }
+  
+  .result-item {
+    display: flex;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--text-light);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .result-item:last-child {
+    border-bottom: none;
+  }
+  
+  .result-item:hover {
+    background-color: var(--background-off);
+  }
+  
+  .result-icon {
+    margin-right: var(--spacing-md);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    width: 30px;
+    text-align: center;
+  }
+  
+  .result-info {
+    flex: 1;
+  }
+  
+  .result-name {
+    margin: 0;
+    margin-bottom: var(--spacing-xs);
+    font-size: 1rem;
+  }
+  
+  .result-address {
+    font-size: 0.875rem;
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .result-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+  
+  .result-type {
+    font-size: 0.75rem;
+    background-color: var(--background-off);
+    padding: 2px 8px;
+    border-radius: var(--border-radius-pill);
+    color: var(--text-medium);
+  }
+  
+  .search-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  
+  .info-section {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+  }
+  
+  .info-section h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+  }
+  
+  .info-steps {
+    margin: 0;
+    padding-left: var(--spacing-lg);
+  }
+  
+  .info-steps li {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .coordinates-inputs {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+  
+  .coordinate-input {
+    flex: 1;
+  }
+  
+  .coordinate-input label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.875rem;
+  }
+  
+  .address-inputs {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xs);
+  }
+  
+  .map-info-window {
+    padding: var(--spacing-xs);
+  }
+  
+  .map-info-window h3 {
+    margin: 0;
+    margin-bottom: var(--spacing-xs);
+    font-size: 1rem;
+  }
+  
+  .map-info-window p {
+    margin: 0;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.875rem;
+  }
+  
+  .mt-2 {
+    margin-top: var(--spacing-sm);
+  }
+  
+  .mt-4 {
+    margin-top: var(--spacing-lg);
+  }
+  
+  /* Responsive */
+  @media (max-width: 767px) {
+    .search-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .search-filters {
+      flex-direction: column;
+    }
+    
+    .coordinates-inputs,
+    .address-inputs {
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+  }
+</style>

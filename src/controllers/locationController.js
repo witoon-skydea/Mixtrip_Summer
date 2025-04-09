@@ -102,6 +102,40 @@ exports.createLocation = async (req, res, next) => {
 };
 
 /**
+ * Show search page for locations
+ * @route GET /locations/search-page
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next function
+ */
+exports.getSearchPage = async (req, res, next) => {
+  try {
+    const { tripId } = req.query;
+    
+    // If tripId is provided, fetch the trip to get existing locations
+    let existingLocations = [];
+    
+    if (tripId && mongoose.Types.ObjectId.isValid(tripId)) {
+      const trip = await Trip.findById(tripId)
+        .populate('locations');
+      
+      if (trip) {
+        existingLocations = trip.locations || [];
+      }
+    }
+    
+    // Render search page
+    res.render('locations/search', {
+      title: tripId ? 'Add Locations to Trip' : 'Search Locations',
+      tripId,
+      existingLocations
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * Get location details
  * @route GET /locations/:id
  * @param {Object} req - Express request object

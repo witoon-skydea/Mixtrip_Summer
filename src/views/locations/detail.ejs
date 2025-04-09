@@ -1,0 +1,295 @@
+<%- contentFor('body') %>
+
+<div class="location-detail-page">
+  <div class="container">
+    <div class="location-header">
+      <h1 class="location-title"><%= location.name %></h1>
+      
+      <div class="location-types">
+        <% if (location.types && location.types.length > 0) { %>
+          <% location.types.forEach(function(type) { %>
+            <span class="location-type"><%= type %></span>
+          <% }); %>
+        <% } %>
+      </div>
+      
+      <% if (location.address && (location.address.formattedAddress || location.address.city || location.address.country)) { %>
+        <div class="location-address">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>
+            <%= location.address.formattedAddress || '' %>
+            <% if (!location.address.formattedAddress) { %>
+              <%= location.address.city || '' %>
+              <% if (location.address.city && location.address.country) { %>, <% } %>
+              <%= location.address.country || '' %>
+            <% } %>
+          </span>
+        </div>
+      <% } %>
+    </div>
+    
+    <div class="location-content">
+      <div class="location-layout">
+        <div class="location-main">
+          <div class="location-section">
+            <h2 class="section-title">About This Location</h2>
+            <div class="location-description">
+              <% if (location.description) { %>
+                <p><%= location.description %></p>
+              <% } else { %>
+                <p class="text-muted">No description provided.</p>
+              <% } %>
+            </div>
+          </div>
+          
+          <% if (location.contactInfo || location.website) { %>
+            <div class="location-section">
+              <h2 class="section-title">Contact Information</h2>
+              <div class="contact-details">
+                <% if (location.contactInfo && location.contactInfo.phone) { %>
+                  <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span><%= location.contactInfo.phone %></span>
+                  </div>
+                <% } %>
+                
+                <% if (location.contactInfo && location.contactInfo.email) { %>
+                  <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span><%= location.contactInfo.email %></span>
+                  </div>
+                <% } %>
+                
+                <% if (location.website) { %>
+                  <div class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <a href="<%= location.website %>" target="_blank" rel="noopener noreferrer"><%= location.website %></a>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          <% } %>
+          
+          <% if (location.operatingHours && location.operatingHours.length > 0) { %>
+            <div class="location-section">
+              <h2 class="section-title">Operating Hours</h2>
+              <div class="operating-hours">
+                <% location.operatingHours.forEach(function(hours) { %>
+                  <div class="hours-item">
+                    <div class="day-name"><%= hours.day %></div>
+                    <div class="hours-time">
+                      <% if (hours.isClosed) { %>
+                        <span class="closed">Closed</span>
+                      <% } else { %>
+                        <%= hours.openTime %> - <%= hours.closeTime %>
+                      <% } %>
+                    </div>
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+          <% } %>
+          
+          <% if (relatedTrips && relatedTrips.length > 0) { %>
+            <div class="location-section">
+              <h2 class="section-title">Featured In These Trips</h2>
+              <div class="related-trips">
+                <% relatedTrips.forEach(function(trip) { %>
+                  <div class="related-trip-item">
+                    <div class="trip-image">
+                      <img src="<%= trip.coverImage ? `/images/trips/${trip.coverImage}` : '/images/trips/default-trip-cover.jpg' %>" alt="<%= trip.title %>">
+                    </div>
+                    <div class="trip-info">
+                      <h3 class="trip-title"><a href="/trips/<%= trip._id %>"><%= trip.title %></a></h3>
+                      <div class="trip-creator">
+                        by <a href="/profile/<%= trip.creator.username %>"><%= trip.creator.name || trip.creator.username %></a>
+                      </div>
+                      <% if (trip.startDate && trip.endDate) { %>
+                        <div class="trip-dates">
+                          <i class="fas fa-calendar-alt"></i>
+                          <%= new Date(trip.startDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) %> - 
+                          <%= new Date(trip.endDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) %>
+                        </div>
+                      <% } %>
+                    </div>
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+          <% } %>
+        </div>
+        
+        <div class="location-sidebar">
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Map</h3>
+            <div class="location-map" id="locationMap" data-lat="<%= location.coordinates.lat %>" data-lng="<%= location.coordinates.lng %>" data-name="<%= location.name %>">
+              <!-- Map will be loaded here -->
+              <div class="map-placeholder">
+                <i class="fas fa-map-marked-alt"></i>
+                <p>Map loading...</p>
+              </div>
+            </div>
+          </div>
+          
+          <% if (isOwner) { %>
+            <div class="sidebar-section">
+              <h3 class="sidebar-title">Location Actions</h3>
+              <div class="location-actions">
+                <button class="btn btn-primary btn-block edit-location-btn" data-location-id="<%= location._id %>">
+                  <i class="fas fa-edit"></i> Edit Location
+                </button>
+                <button class="btn btn-error btn-block delete-location-btn" data-location-id="<%= location._id %>">
+                  <i class="fas fa-trash"></i> Delete Location
+                </button>
+              </div>
+            </div>
+          <% } else { %>
+            <div class="sidebar-section">
+              <h3 class="sidebar-title">Add to Trip</h3>
+              <div class="add-to-trip-form">
+                <div class="form-group">
+                  <label for="tripSelect">Select Trip</label>
+                  <select id="tripSelect" class="form-control">
+                    <option value="">-- Select a Trip --</option>
+                    <!-- This would be populated with user's trips via JavaScript -->
+                  </select>
+                </div>
+                <button class="btn btn-primary btn-block add-to-trip-btn" data-location-id="<%= location._id %>">
+                  <i class="fas fa-plus"></i> Add to Trip
+                </button>
+              </div>
+            </div>
+          <% } %>
+          
+          <% if (location.images && location.images.length > 0) { %>
+            <div class="sidebar-section">
+              <h3 class="sidebar-title">Images</h3>
+              <div class="location-images">
+                <% location.images.forEach(function(image) { %>
+                  <div class="location-image">
+                    <img src="<%= image.url %>" alt="<%= image.caption || location.name %>">
+                    <% if (image.caption) { %>
+                      <div class="image-caption"><%= image.caption %></div>
+                    <% } %>
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+          <% } %>
+          
+          <% if (location.tags && location.tags.length > 0) { %>
+            <div class="sidebar-section">
+              <h3 class="sidebar-title">Tags</h3>
+              <div class="location-tags">
+                <% location.tags.forEach(function(tag) { %>
+                  <a href="/locations/search?tag=<%= tag %>" class="tag-item"><%= tag %></a>
+                <% }); %>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Location Modal (Hidden by default) -->
+<div class="modal" id="editLocationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Location</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="editLocationForm">
+          <div class="form-group">
+            <label for="locationName">Name *</label>
+            <input type="text" id="locationName" name="name" value="<%= location.name %>" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="locationDescription">Description</label>
+            <textarea id="locationDescription" name="description" rows="3"><%= location.description || '' %></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="locationType">Type</label>
+            <select id="locationType" name="types" multiple>
+              <option value="accommodation" <%= location.types && location.types.includes('accommodation') ? 'selected' : '' %>>Accommodation</option>
+              <option value="restaurant" <%= location.types && location.types.includes('restaurant') ? 'selected' : '' %>>Restaurant</option>
+              <option value="cafe" <%= location.types && location.types.includes('cafe') ? 'selected' : '' %>>Cafe</option>
+              <option value="bar" <%= location.types && location.types.includes('bar') ? 'selected' : '' %>>Bar</option>
+              <option value="attraction" <%= location.types && location.types.includes('attraction') ? 'selected' : '' %>>Attraction</option>
+              <option value="museum" <%= location.types && location.types.includes('museum') ? 'selected' : '' %>>Museum</option>
+              <option value="park" <%= location.types && location.types.includes('park') ? 'selected' : '' %>>Park</option>
+              <option value="beach" <%= location.types && location.types.includes('beach') ? 'selected' : '' %>>Beach</option>
+              <option value="shopping" <%= location.types && location.types.includes('shopping') ? 'selected' : '' %>>Shopping</option>
+              <option value="entertainment" <%= location.types && location.types.includes('entertainment') ? 'selected' : '' %>>Entertainment</option>
+              <option value="temple" <%= location.types && location.types.includes('temple') ? 'selected' : '' %>>Temple</option>
+              <option value="landmark" <%= location.types && location.types.includes('landmark') ? 'selected' : '' %>>Landmark</option>
+              <option value="transportation" <%= location.types && location.types.includes('transportation') ? 'selected' : '' %>>Transportation</option>
+              <option value="viewpoint" <%= location.types && location.types.includes('viewpoint') ? 'selected' : '' %>>Viewpoint</option>
+              <option value="other" <%= location.types && location.types.includes('other') ? 'selected' : '' %>>Other</option>
+            </select>
+            <small>Hold Ctrl/Cmd to select multiple types</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="locationWebsite">Website</label>
+            <input type="url" id="locationWebsite" name="website" value="<%= location.website || '' %>" placeholder="https://example.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="locationPhone">Phone</label>
+            <input type="text" id="locationPhone" name="contactInfo.phone" value="<%= location.contactInfo && location.contactInfo.phone || '' %>">
+          </div>
+          
+          <div class="form-group">
+            <label for="locationEmail">Email</label>
+            <input type="email" id="locationEmail" name="contactInfo.email" value="<%= location.contactInfo && location.contactInfo.email || '' %>">
+          </div>
+          
+          <div class="form-group">
+            <label for="locationTags">Tags</label>
+            <input type="text" id="locationTags" name="tags" value="<%= location.tags ? location.tags.join(', ') : '' %>" placeholder="Add tags separated by commas">
+          </div>
+          
+          <div class="form-action">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-outline modal-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Location Confirmation Modal (Hidden by default) -->
+<div class="modal" id="deleteLocationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Delete Location</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <p>Are you sure you want to delete this location? This action cannot be undone.</p>
+        <p>Note: If this location is used in any trips, it will be removed from those trips as well.</p>
+        
+        <div class="form-action">
+          <button type="button" class="btn btn-error confirm-delete-btn">Delete</button>
+          <button type="button" class="btn btn-outline modal-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if (typeof extraJS === 'undefined') { %>
+  <% extraJS = []; %>
+<% } %>
+<% extraJS.push('locations'); %>
+<% extraJS.push('maps'); %>

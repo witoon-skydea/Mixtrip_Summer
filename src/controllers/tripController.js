@@ -622,6 +622,27 @@ exports.exploreTrips = async (req, res, next) => {
 };
 
 /**
+ * Get user's trips as JSON for API usage
+ * @route GET /trips/my-trips/list-json
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next function
+ */
+exports.getUserTripsJson = async (req, res, next) => {
+  try {
+    // Find user's trips
+    const trips = await Trip.find({ creator: req.user.id })
+      .sort({ createdAt: -1 })
+      .select('_id title startDate endDate status');
+    
+    // Return trips as JSON
+    return res.status(200).json(trips);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * Upload trip cover image
  * @route POST /trips/:id/upload-cover
  * @param {Object} req - Express request object

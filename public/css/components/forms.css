@@ -1,0 +1,408 @@
+/**
+ * MixTrip Summer - Form Styles
+ * Styling for form elements
+ */
+
+/* Form container */
+.form-container {
+  background-color: var(--background-light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Form group - container for label and input */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Form label */
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* Form required indicator */
+.form-group label .required {
+  color: var(--error-color);
+  margin-left: 2px;
+}
+
+/* Form control - common styling for inputs */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+  background-color: var(--background-light);
+  background-clip: padding-box;
+  border: 1px solid var(--text-light);
+  border-radius: var(--border-radius-md);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(30, 136, 229, 0.25);
+}
+
+/* Text input specific */
+input[type="text"].form-control,
+input[type="email"].form-control,
+input[type="password"].form-control,
+input[type="search"].form-control,
+input[type="url"].form-control,
+input[type="tel"].form-control,
+input[type="number"].form-control {
+  height: calc(1.5em + 0.75rem + 2px);
+}
+
+/* Textarea */
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Select control */
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem;
+}
+
+/* Disabled state */
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: var(--background-off);
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Form validation states */
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  border-color: var(--success-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%234caf50' d='M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: var(--error-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23f44336' d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+/* Error message */
+.error-message {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--error-color);
+}
+
+/* Success message */
+.success-message {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--success-color);
+}
+
+/* Checkbox and radio styling */
+.checkbox-group,
+.radio-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.checkbox,
+.radio {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+}
+
+.checkbox input[type="checkbox"],
+.radio input[type="radio"] {
+  margin-right: var(--spacing-sm);
+}
+
+.checkbox label,
+.radio label {
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+/* Custom checkbox and radio */
+.custom-checkbox,
+.custom-radio {
+  position: relative;
+  padding-left: 1.75rem;
+  margin-bottom: var(--spacing-xs);
+  cursor: pointer;
+}
+
+.custom-checkbox input,
+.custom-radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: var(--background-light);
+  border: 1px solid var(--text-light);
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox .checkmark {
+  border-radius: 3px;
+}
+
+.custom-radio .checkmark {
+  border-radius: 50%;
+}
+
+.custom-checkbox:hover input ~ .checkmark,
+.custom-radio:hover input ~ .checkmark {
+  background-color: var(--background-off);
+}
+
+.custom-checkbox input:checked ~ .checkmark,
+.custom-radio input:checked ~ .checkmark {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after,
+.custom-radio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.custom-checkbox .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.custom-radio .checkmark:after {
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* Input groups */
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group > .form-control {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.input-group-prepend,
+.input-group-append {
+  display: flex;
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-medium);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--background-off);
+  border: 1px solid var(--text-light);
+}
+
+.input-group-prepend .input-group-text {
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group-append .input-group-text {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group > .form-control:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group > .form-control:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Form actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+/* Inline form */
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline .form-group {
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-bottom: 0;
+  margin-right: var(--spacing-md);
+}
+
+.form-inline label {
+  margin-right: var(--spacing-sm);
+  margin-bottom: 0;
+}
+
+/* Form row (for grid layout) */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row > .form-group {
+  padding-right: 5px;
+  padding-left: 5px;
+  flex: 1 0 0%;
+}
+
+/* Form help text */
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--text-medium);
+}
+
+/* Form file input */
+.form-file {
+  position: relative;
+}
+
+.form-file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.form-file-label {
+  display: block;
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--text-light);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-file-label:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.form-file-text {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-medium);
+}
+
+/* Date and time inputs */
+input[type="date"].form-control,
+input[type="time"].form-control,
+input[type="datetime-local"].form-control {
+  appearance: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .form-inline .form-group {
+    margin-right: 0;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .form-row > .form-group {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions .btn {
+    margin-bottom: var(--spacing-sm);
+  }
+}

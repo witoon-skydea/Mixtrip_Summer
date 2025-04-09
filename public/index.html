@@ -78,8 +78,16 @@
         
         <div class="loader"></div>
         
-        <p>Redirecting to the application...</p>
-        <p>If you are not redirected automatically, <a href="/" class="btn">Click Here</a></p>
+        <p>Welcome to MixTrip Summer</p>
+        <p>Loading the application...</p>
+        <p>If you are not redirected automatically, <a href="/home" class="btn">Click Here</a></p>
+    
+        <script>
+            // Redirect to the main application page after a short delay
+            setTimeout(function() {
+                window.location.href = '/home';
+            }, 1500);
+        </script>
     </div>
 </body>
 </html>

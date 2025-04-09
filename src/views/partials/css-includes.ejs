@@ -1,0 +1,25 @@
+<!-- CSS Files -->
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/utilities.css">
+
+<!-- Component CSS -->
+<link rel="stylesheet" href="/css/components/buttons.css">
+<link rel="stylesheet" href="/css/components/forms.css">
+<link rel="stylesheet" href="/css/components/alerts.css">
+<link rel="stylesheet" href="/css/components/modals.css">
+
+<!-- Section specific CSS -->
+<% if (typeof pageCss !== 'undefined') { %>
+    <% pageCss.forEach(function(css) { %>
+        <link rel="stylesheet" href="/css/<%= css %>.css">
+    <% }); %>
+<% } %>
+
+<!-- Theme CSS (if specified) -->
+<% if (typeof theme !== 'undefined' && theme) { %>
+    <link rel="stylesheet" href="/css/themes/<%= theme %>.css">
+<% } %>
+
+<!-- Responsive CSS (load last) -->
+<link rel="stylesheet" href="/css/responsive.css">

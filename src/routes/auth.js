@@ -12,7 +12,9 @@ const { isAuthenticated } = require('../middlewares/authMiddleware');
 router.get('/register', (req, res) => {
   res.render('auth/register', {
     title: 'Register',
-    user: null
+    user: req.session.user || null,
+    formData: {},
+    errors: []
   });
 });
 
@@ -52,7 +54,9 @@ router.post('/register', [
 router.get('/login', (req, res) => {
   res.render('auth/login', {
     title: 'Login',
-    user: null
+    user: req.session.user || null,
+    formData: {},
+    errors: []
   });
 });
 
@@ -86,7 +90,9 @@ router.get('/logout', isAuthenticated, authController.logout);
 router.get('/forgot-password', (req, res) => {
   res.render('auth/forgot-password', {
     title: 'Forgot Password',
-    user: null
+    user: req.session.user || null,
+    formData: {},
+    errors: []
   });
 });
 

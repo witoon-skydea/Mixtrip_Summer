@@ -1,0 +1,33 @@
+<%- contentFor('body') %>
+
+<div class="auth-page">
+  <div class="container">
+    <div class="auth-container">
+      <div class="auth-box">
+        <div class="auth-header">
+          <h1 class="auth-title">Registration Successful</h1>
+          <p class="auth-subtitle">Your account has been created</p>
+        </div>
+        
+        <div class="success-message">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          
+          <div class="success-text">
+            <p><%= message || 'Your account has been created successfully.' %></p>
+            <p>You are now logged in and can start planning your trips.</p>
+          </div>
+          
+          <div class="form-action">
+            <a href="/" class="btn btn-primary btn-block">Go to Home</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="auth-image">
+        <img src="/images/auth/register-success.jpg" alt="Registration Success Image">
+      </div>
+    </div>
+  </div>
+</div>

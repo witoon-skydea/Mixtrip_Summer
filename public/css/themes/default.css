@@ -1,0 +1,45 @@
+/**
+ * MixTrip Summer - Default Theme
+ * Base color scheme and styles
+ */
+
+:root {
+  /* Color palette */
+  --primary-color: #1e88e5;
+  --primary-dark: #1565c0;
+  --primary-light: #64b5f6;
+  --secondary-color: #ff8a65;
+  --secondary-dark: #e64a19;
+  --secondary-light: #ffab91;
+  --accent-color: #ffd54f;
+  --text-dark: #263238;
+  --text-medium: #546e7a;
+  --text-light: #b0bec5;
+  --background-light: #ffffff;
+  --background-off: #f5f7fa;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+  
+  /* Typography */
+  --font-primary: 'Prompt', sans-serif;
+  --font-secondary: 'Kanit', sans-serif;
+  
+  /* Borders */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-pill: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
+  --shadow-xl: 0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
+  
+  /* Other theme variables */
+  --card-hover-transform: translateY(-5px);
+  --button-hover-transform: translateY(-2px);
+  --animation-timing: 0.3s ease;
+}

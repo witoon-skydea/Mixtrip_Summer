@@ -3,10 +3,20 @@ const router = express.Router();
 
 /**
  * @route   GET /
- * @desc    Home page route
+ * @desc    Home page route (redirects to public/index.html for first-time loading)
  * @access  Public
  */
 router.get('/', (req, res) => {
+  // Static HTML page in public folder will handle the initial loading
+  res.sendFile('index.html', { root: 'public' });
+});
+
+/**
+ * @route   GET /home
+ * @desc    Main application home page
+ * @access  Public
+ */
+router.get('/home', (req, res) => {
   res.render('index', { 
     title: 'MixTrip Summer',
     message: 'Your travel planning companion',

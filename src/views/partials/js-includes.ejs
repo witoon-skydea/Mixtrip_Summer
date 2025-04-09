@@ -1,0 +1,30 @@
+<!-- Core JS Files -->
+<script src="/js/utils.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Module JS Files -->
+<script src="/js/modules/auth.js"></script>
+<script src="/js/modules/ui.js"></script>
+
+<!-- Component JS Files -->
+<% if (typeof requiredComponents !== 'undefined' && requiredComponents.length > 0) { %>
+    <% requiredComponents.forEach(function(component) { %>
+        <script src="/js/components/<%= component %>.js"></script>
+    <% }); %>
+<% } %>
+
+<!-- Page specific JS Files -->
+<% if (typeof pageJs !== 'undefined' && pageJs.length > 0) { %>
+    <% pageJs.forEach(function(js) { %>
+        <script src="/js/pages/<%= js %>.js"></script>
+    <% }); %>
+<% } else if (typeof pageJs !== 'undefined') { %>
+    <script src="/js/pages/<%= pageJs %>.js"></script>
+<% } %>
+
+<!-- Additional scripts -->
+<% if (typeof extraJS !== 'undefined' && extraJS.length > 0) { %>
+    <% extraJS.forEach(function(js) { %>
+        <script src="/js/<%= js %>.js"></script>
+    <% }); %>
+<% } %>
